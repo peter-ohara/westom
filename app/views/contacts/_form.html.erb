@@ -1,0 +1,146 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name, id: :contact_full_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_select :date_of_birth,
+                         {
+                             start_year: Date.today.year - 18,
+                             end_year: Date.today.year - 100,
+                         } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :present_address %>
+    <%= form.text_area :present_address, id: :contact_present_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :community %>
+    <%= form.text_field :community, id: :contact_community %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length_of_stay_at_present_address %>
+    <%= form.number_field :length_of_stay_at_present_address, id: :contact_length_of_stay_at_present_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile %>
+    <%= form.text_field :mobile, id: :contact_mobile %>
+  </div>
+
+  <div class="field">
+    <%= form.label :occupation %>
+    <%= form.text_field :occupation, id: :contact_occupation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :contact_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :personal_property %>
+    <%= form.check_box :personal_property, id: :contact_personal_property %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jointly_owned_property %>
+    <%= form.check_box :jointly_owned_property, id: :contact_jointly_owned_property %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent %>
+    <%= form.check_box :agent, id: :contact_agent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :has_authority_from_owner %>
+    <%= form.check_box :has_authority_from_owner, id: :contact_has_authority_from_owner %>
+  </div>
+
+  <div class="field">
+    <%= form.label :has_site_plan %>
+    <%= form.check_box :has_site_plan, id: :contact_has_site_plan %>
+  </div>
+
+  <div class="field">
+    <%= form.label :site_plan_request %>
+    <%= form.check_box :site_plan_request, id: :contact_site_plan_request %>
+  </div>
+
+  <div class="field">
+    <%= form.label :search_report %>
+    <%= form.check_box :search_report, id: :contact_search_report %>
+  </div>
+
+  <div class="field">
+    <%= form.label :search_report_request %>
+    <%= form.check_box :search_report_request, id: :contact_search_report_request %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valuation_report %>
+    <%= form.check_box :valuation_report, id: :contact_valuation_report %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valuation_report_request %>
+    <%= form.check_box :valuation_report_request, id: :contact_valuation_report_request %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_of_service %>
+    <%= form.number_field :type_of_service, id: :contact_type_of_service %>
+  </div>
+
+  <div class="field">
+    <%= form.label :request_details %>
+    <%= form.text_area :request_details, id: :contact_request_details %>
+  </div>
+
+  <div class="field">
+    <%= form.label :request_date %>
+    <%= form.date_select :request_date, id: :contact_request_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_signature %>
+    <%= form.text_field :client_signature, id: :contact_client_signature %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id, 'Broker' %>
+    <%= form.collection_select :user_id,
+                               User.all,
+                               :id,
+                               :full_name,
+                               {},
+                               { id: :contact_user_id } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :signature_of_authorized_broker %>
+    <%= form.text_field :signature_of_authorized_broker, id: :contact_signature_of_authorized_broker %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

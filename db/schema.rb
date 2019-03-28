@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190328075856) do
+ActiveRecord::Schema.define(version: 20190328131654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "full_name"
+    t.date "date_of_birth"
+    t.text "present_address"
+    t.string "community"
+    t.integer "length_of_stay_at_present_address"
+    t.string "mobile"
+    t.string "occupation"
+    t.string "email"
+    t.boolean "personal_property"
+    t.boolean "jointly_owned_property"
+    t.boolean "agent"
+    t.boolean "has_authority_from_owner"
+    t.boolean "has_site_plan"
+    t.boolean "site_plan_request"
+    t.boolean "search_report"
+    t.boolean "search_report_request"
+    t.boolean "valuation_report"
+    t.boolean "valuation_report_request"
+    t.integer "type_of_service"
+    t.text "request_details"
+    t.date "request_date"
+    t.string "client_signature"
+    t.bigint "user_id"
+    t.string "signature_of_authorized_broker"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -22,4 +52,5 @@ ActiveRecord::Schema.define(version: 20190328075856) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "contacts", "users"
 end
