@@ -10,5 +10,18 @@
   <%= @user.last_name %>
 </p>
 
+
+
+<div id="clients">
+  <ul>
+    <% @user.contacts.each do |contact| %>
+      <li>
+        <%= contact.full_name %>
+        <%= link_to 'View', contact_path(contact) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
