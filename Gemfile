@@ -41,6 +41,9 @@ gem 'font-awesome-sass', '~> 5.8.1'
 gem 'jquery-easing-rails'
 gem 'jquery-rails'
 
+gem 'jquery-datatables'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

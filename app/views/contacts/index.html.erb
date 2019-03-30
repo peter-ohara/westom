@@ -1,73 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Contacts</h1>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <%= link_to 'Add Contact', new_contact_path, class: 'm-0 font-weight-bold' %>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm table-hover" id="dttb-contacts" width="100%" cellspacing="0">
 
-<table>
-  <thead>
-    <tr>
-      <th>Full name</th>
-      <th>Date of birth</th>
-      <th>Present address</th>
-      <th>Community</th>
-      <th>Length of stay at present address</th>
-      <th>Mobile</th>
-      <th>Occupation</th>
-      <th>Email</th>
-      <th>Personal property</th>
-      <th>Jointly owned property</th>
-      <th>Agent</th>
-      <th>Has authority from owner</th>
-      <th>Has site plan</th>
-      <th>Site plan request</th>
-      <th>Search report</th>
-      <th>Search report request</th>
-      <th>Valuation report</th>
-      <th>Valuation report request</th>
-      <th>Type of service</th>
-      <th>Request details</th>
-      <th>Request date</th>
-      <th>Client signature</th>
-      <th>User</th>
-      <th>Signature of authorized broker</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <thead>
+        <tr>
+          <th>Full name</th>
+          <th>Present address</th>
+          <th>Community</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Occupation</th>
+          <th>Type of service</th>
+          <th>Request date</th>
+          <th>Broker</th>
+        </tr>
+        </thead>
 
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.full_name %></td>
-        <td><%= contact.date_of_birth %></td>
-        <td><%= contact.present_address %></td>
-        <td><%= contact.community %></td>
-        <td><%= contact.length_of_stay_at_present_address %></td>
-        <td><%= contact.mobile %></td>
-        <td><%= contact.occupation %></td>
-        <td><%= contact.email %></td>
-        <td><%= contact.personal_property %></td>
-        <td><%= contact.jointly_owned_property %></td>
-        <td><%= contact.agent %></td>
-        <td><%= contact.has_authority_from_owner %></td>
-        <td><%= contact.has_site_plan %></td>
-        <td><%= contact.site_plan_request %></td>
-        <td><%= contact.search_report %></td>
-        <td><%= contact.search_report_request %></td>
-        <td><%= contact.valuation_report %></td>
-        <td><%= contact.valuation_report_request %></td>
-        <td><%= contact.type_of_service %></td>
-        <td><%= contact.request_details %></td>
-        <td><%= contact.request_date %></td>
-        <td><%= contact.client_signature %></td>
-        <td><%= contact.broker.full_name %></td>
-        <td><%= contact.signature_of_authorized_broker %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tfoot>
+        <tr>
+          <th>Full name</th>
+          <th>Present address</th>
+          <th>Community</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Occupation</th>
+          <th>Type of service</th>
+          <th>Request date</th>
+          <th>Broker</th>
+        </tr>
+        </tfoot>
 
-<br>
-
-<%= link_to 'New Contact', new_contact_path %>
+        <tbody>
+        <% @contacts.each do |contact| %>
+          <tr>
+            <td><%= link_to contact.full_name, contact %></td>
+            <td><%= contact.present_address %></td>
+            <td><%= contact.community %></td>
+            <td><%= contact.mobile %></td>
+            <td><%= contact.email %></td>
+            <td><%= contact.occupation %></td>
+            <td><%= contact.type_of_service.titleize %></td>
+            <td><%= contact.request_date.to_formatted_s(:long) %></td>
+            <td><%= link_to contact.broker.full_name, contact.broker %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
