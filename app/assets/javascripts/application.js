@@ -12,4 +12,13 @@
 //
 //= require rails-ujs
 //= require turbolinks
+
+// Boostrap 4 gem requirements
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+// Cocoon gem requirement
+//= require cocoon
+
 //= require_tree .

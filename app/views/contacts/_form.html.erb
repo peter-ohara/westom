@@ -140,6 +140,23 @@
     <%= form.text_field :signature_of_authorized_broker, id: :contact_signature_of_authorized_broker %>
   </div>
 
+  <div id="properties">
+    Properties:
+    <ul>
+      <%= form.fields_for :properties do |property| %>
+        <%= render 'property_fields', f: property %>
+      <% end %>
+
+      <div class="links">
+        <br>
+        <br>
+        <%= link_to_add_association 'Add property', form, :properties %>
+      </div>
+    </ul>
+
+
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

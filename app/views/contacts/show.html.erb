@@ -120,6 +120,19 @@
   <%= @contact.signature_of_authorized_broker %>
 </p>
 
+<div id="properties">
+  <h2>Properties</h2>
+  <ul>
+    <% @contact.properties.each do |property| %>
+      <li>
+        <%= property.name %>,
+        <%= property.location %>
+        <%= link_to 'View', property_path(property) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
 <%= link_to 'Delete Contact', @contact, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Back', contacts_path %>

@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact, only: %i[show edit update destroy]
 
   # GET /contacts
   # GET /contacts.json
@@ -9,17 +9,16 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   # GET /contacts/1.json
-  def show
-  end
+  def show; end
 
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.properties.build
   end
 
   # GET /contacts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /contacts
   # POST /contacts.json
@@ -62,13 +61,44 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:full_name, :date_of_birth, :present_address, :community, :length_of_stay_at_present_address, :mobile, :occupation, :email, :personal_property, :jointly_owned_property, :agent, :has_authority_from_owner, :has_site_plan, :site_plan_request, :search_report, :search_report_request, :valuation_report, :valuation_report_request, :type_of_service, :request_details, :request_date, :client_signature, :user_id, :signature_of_authorized_broker)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:full_name,
+                                    :date_of_birth,
+                                    :present_address,
+                                    :community,
+                                    :length_of_stay_at_present_address,
+                                    :mobile,
+                                    :occupation,
+                                    :email,
+                                    :personal_property,
+                                    :jointly_owned_property,
+                                    :agent,
+                                    :has_authority_from_owner,
+                                    :has_site_plan,
+                                    :site_plan_request,
+                                    :search_report,
+                                    :search_report_request,
+                                    :valuation_report,
+                                    :valuation_report_request,
+                                    :type_of_service,
+                                    :request_details,
+                                    :request_date,
+                                    :client_signature,
+                                    :user_id,
+                                    :signature_of_authorized_broker,
+                                    properties_attributes: %i[_destroy
+                                                              id
+                                                              name
+                                                              description
+                                                              location
+                                                              category
+                                                              property_type])
+  end
 end
