@@ -8,4 +8,11 @@ class Contact < ApplicationRecord
   accepts_nested_attributes_for :properties,
                                 allow_destroy: true,
                                 reject_if: :all_blank
+
+  enum type_of_service: { acquisition_of_property: 0,
+                          sale_of_property: 1,
+                          rental_of_property: 2,
+                          land_registration_or_search: 3,
+                          due_diligence: 4,
+                          property_management_services: 5 }
 end

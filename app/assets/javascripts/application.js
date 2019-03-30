@@ -21,4 +21,11 @@
 // Cocoon gem requirement
 //= require cocoon
 
+//= require jquery.easing
+//= require sb-admin-2
+
+//= require Chart.bundle.min
+//= require demo/chart-area-demo
+//= require demo/chart-pie-demo
+
 //= require_tree .

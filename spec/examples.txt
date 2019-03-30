@@ -1,15 +1,15 @@
 example_id                              | status | run_time        |
 --------------------------------------- | ------ | --------------- |
-./spec/features/contacts_spec.rb[1:1]   | passed | 7.87 seconds    |
-./spec/features/contacts_spec.rb[1:2]   | passed | 7.89 seconds    |
-./spec/features/contacts_spec.rb[1:3]   | passed | 0.663 seconds   |
-./spec/features/contacts_spec.rb[1:4]   | passed | 3.93 seconds    |
-./spec/features/contacts_spec.rb[1:5]   | passed | 1.12 seconds    |
-./spec/features/contacts_spec.rb[1:6]   | passed | 0.43379 seconds |
-./spec/features/properties_spec.rb[1:1] | passed | 1.02 seconds    |
-./spec/features/properties_spec.rb[1:2] | passed | 0.93051 seconds |
-./spec/features/properties_spec.rb[1:3] | passed | 0.38112 seconds |
-./spec/features/properties_spec.rb[1:4] | passed | 0.23416 seconds |
-./spec/features/properties_spec.rb[1:5] | passed | 0.46455 seconds |
-./spec/features/properties_spec.rb[1:6] | passed | 2.76 seconds    |
-./spec/features/properties_spec.rb[1:7] | passed | 0.18016 seconds |
+./spec/features/contacts_spec.rb[1:1]   | passed | 3.04 seconds    |
+./spec/features/contacts_spec.rb[1:2]   | passed | 3.1 seconds     |
+./spec/features/contacts_spec.rb[1:3]   | passed | 0.33866 seconds |
+./spec/features/contacts_spec.rb[1:4]   | passed | 0.96218 seconds |
+./spec/features/contacts_spec.rb[1:5]   | passed | 0.48312 seconds |
+./spec/features/contacts_spec.rb[1:6]   | passed | 0.1875 seconds  |
+./spec/features/properties_spec.rb[1:1] | passed | 1.07 seconds    |
+./spec/features/properties_spec.rb[1:2] | passed | 1.02 seconds    |
+./spec/features/properties_spec.rb[1:3] | passed | 0.31589 seconds |
+./spec/features/properties_spec.rb[1:4] | passed | 0.24501 seconds |
+./spec/features/properties_spec.rb[1:5] | passed | 0.46612 seconds |
+./spec/features/properties_spec.rb[1:6] | passed | 1.02 seconds    |
+./spec/features/properties_spec.rb[1:7] | passed | 1.8 seconds     |
