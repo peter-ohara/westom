@@ -1,0 +1,5 @@
+= simple_form_for(@user, html: { class: '' }) do |f|
+  = f.error_notification
+  = f.input :first_name
+  = f.input :last_name
+  = f.submit class: 'btn btn-primary'

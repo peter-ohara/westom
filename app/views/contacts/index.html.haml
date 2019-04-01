@@ -1,0 +1,44 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item.active
+    Contacts
+
+= content_for :actions do
+  = link_to new_contact_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New Contact
+
+%p#notice= notice
+.card.shadow-sm.mb-4
+  .card-body
+    .table-responsive
+      %table#dttb-contacts.table.table-sm.table-hover{cellspacing: "0", width: "100%"}
+        %thead
+          %tr
+            %th Full name
+            %th Present address
+            %th Community
+            %th Mobile
+            %th Email
+            %th Occupation
+            %th Broker
+        %tfoot
+          %tr
+            %th Full name
+            %th Present address
+            %th Community
+            %th Mobile
+            %th Email
+            %th Occupation
+            %th Broker
+        %tbody
+          - @contacts.each do |contact|
+            %tr
+              %td= link_to contact.full_name, contact
+              %td= contact.present_address
+              %td= contact.community
+              %td= contact.mobile
+              %td= contact.email
+              %td= contact.occupation
+              %td= link_to contact.broker.full_name, contact.broker

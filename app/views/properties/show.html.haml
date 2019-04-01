@@ -1,0 +1,32 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Properties', properties_path
+  %li.breadcrumb-item.active
+    = @property.name
+
+
+%h2.h6 Details
+= render layout: 'layouts/card_with_body' do
+  %dl.row
+    %dt.col-md-2 Name
+    %dd.col-md-10= @property.name
+
+    %dt.col-md-2 Description
+    %dd.col-md-10= @property.description
+
+    %dt.col-md-2 Location
+    %dd.col-md-10= @property.location
+
+    %dt.col-md-2 Category
+    %dd.col-md-10= @property.category.titleize
+
+    %dt.col-md-2 Property Type
+    %dd.col-md-10= @property.property_type.titleize
+
+    %dt.col-md-2 Client
+    %dd.col-md-10= link_to @property.contact.full_name, @property.contact
+
+  = link_to 'EDIT', edit_property_path(@property), class: 'card-link'
+  = link_to 'DELETE', @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'

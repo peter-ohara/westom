@@ -1,0 +1,9 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Users', users_path
+  %li.breadcrumb-item.active
+    New
+
+= render partial: 'form', layout: 'layouts/card_with_body'

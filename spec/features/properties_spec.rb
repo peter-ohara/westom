@@ -10,7 +10,7 @@ RSpec.feature 'Property Management', js: true do
 
   scenario 'should add a property' do
     visit properties_path
-    click_link 'New Property'
+    click_link 'Add New Property'
     fill_out_property_information(property, contact1)
     click_button 'Create Property'
     expect(page).to have_content 'Property was successfully created.'
@@ -27,7 +27,7 @@ RSpec.feature 'Property Management', js: true do
     visit property_path existing_property
 
     page.accept_confirm do
-      click_link 'Delete Property'
+      click_link 'DELETE'
     end
 
     expect(page).to have_content 'Property was successfully deleted.'
@@ -62,7 +62,7 @@ RSpec.feature 'Property Management', js: true do
     visit contact_path contact1
     within :css, '#properties' do
       expect(page).to have_content existing_property.name
-      expect(page).to have_link('View', href: property_path(existing_property))
+      expect(page).to have_link href: property_path(existing_property)
     end
   end
 end
@@ -92,7 +92,7 @@ def expect_page_to_have_property_information(page, existing_property)
   expect(page).to have_content existing_property.name
   expect(page).to have_content existing_property.description
   expect(page).to have_content existing_property.location
-  expect(page).to have_content existing_property.category
-  expect(page).to have_content existing_property.property_type
+  expect(page).to have_content existing_property.category.titleize
+  expect(page).to have_content existing_property.property_type.titleize
   expect(page).to have_content existing_property.contact.full_name
 end

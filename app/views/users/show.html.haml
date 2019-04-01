@@ -1,0 +1,33 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Users', users_path
+  %li.breadcrumb-item.active
+    = @user.full_name
+
+
+%h2.h6 Details
+= render layout: 'layouts/card_with_body' do
+  %dl.row
+    %dt.col-md-3 First name
+    %dd.col-md-9= @user.first_name
+
+    %dt.col-md-3 Last name
+    %dd.col-md-9= @user.last_name
+
+  = link_to 'Edit', edit_user_path(@user), class: 'card-link'
+  = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+
+%h2.h6 Clients
+= render layout: 'layouts/card' do
+  .list-group.list-group-flush#clients
+    - @user.contacts.each do |contact|
+      = link_to contact, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= contact.full_name
+          %small= contact.community
+        %p.mb-1= contact.mobile
+        %p.mb-1= contact.email
+        %p.mb-1= "Location: #{contact.present_address}"
+        -#%small= contact.community

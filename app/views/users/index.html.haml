@@ -1,0 +1,29 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item.active
+    Users
+
+= content_for :actions do
+  = link_to new_user_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New User
+
+%p#notice= notice
+.card.shadow-sm.mb-4
+  .card-body
+    .table-responsive
+      %table#dttb-users.table.table-sm.table-hover{cellspacing: "0", width: "100%"}
+        %thead
+          %tr
+            %th First name
+            %th Last name
+        %tfoot
+          %tr
+            %th First name
+            %th Last name
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td= link_to user.first_name, user
+              %td= user.last_name

@@ -1,0 +1,11 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item.active
+    Home
+
+%ul
+  %li
+    = link_to 'Users', users_path
+  %li
+    = link_to 'Contacts', contacts_path
+  %li
+    = link_to 'Properties', properties_path

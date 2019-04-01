@@ -1,0 +1,10 @@
+.nested-fields
+  = f.input :name
+  = f.input :description
+  = f.input :location
+  = f.input :category, collection: Property.categories.keys.map {|category| [category.titleize, category]}
+  = f.input :property_type, collection: Property.property_types.keys.map {|p_type| [p_type.titleize, p_type]}
+
+  %br
+  %br
+  = link_to_remove_association 'Remove property', f

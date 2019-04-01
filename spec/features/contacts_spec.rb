@@ -10,7 +10,7 @@ RSpec.feature 'Contact Management', js: true do
 
   scenario 'should add a contact (lead or client)' do
     visit contacts_path
-    click_link 'New Contact'
+    click_link 'Add New Contact'
     fill_out_contact_information(contact, broker1)
     click_button 'Create Contact'
     expect(page).to have_content 'Contact was successfully created.'
@@ -27,7 +27,7 @@ RSpec.feature 'Contact Management', js: true do
     visit contact_path existing_contact
 
     page.accept_confirm do
-      click_link 'Delete Contact'
+      click_link 'DELETE'
     end
 
     expect(page).to have_content 'Contact was successfully deleted.'
@@ -48,11 +48,11 @@ RSpec.feature 'Contact Management', js: true do
   end
 
   scenario 'should be able to view all clients that have been assigned to ' \
-           'another user as their broke' do
+           'another user as their broker' do
     visit user_path broker1
     within :css, '#clients' do
       expect(page).to have_content existing_contact.full_name
-      expect(page).to have_link('View', href: contact_path(existing_contact))
+      expect(page).to have_link, href: contact_path(existing_contact)
     end
   end
 end
@@ -82,7 +82,8 @@ def fill_out_contact_information(contact, user)
   check :contact_valuation_report
   check :contact_valuation_report_request
 
-  fill_in :contact_type_of_service, with: contact.type_of_service
+  select contact.type_of_service.titleize, from: :contact_type_of_service
+
   fill_in :contact_request_details, with: contact.request_details
 
   select contact.request_date.strftime('%Y'), from: 'contact_request_date_1i'
@@ -107,22 +108,5 @@ def expect_page_to_have_contact_information(page, existing_contact)
   expect(page).to have_content existing_contact.mobile
   expect(page).to have_content existing_contact.occupation
   expect(page).to have_content existing_contact.email
-  expect(page).to have_content existing_contact.personal_property
-  expect(page).to have_content existing_contact.jointly_owned_property
-  expect(page).to have_content existing_contact.agent
-  expect(page).to have_content existing_contact.has_authority_from_owner
-  expect(page).to have_content existing_contact.has_site_plan
-  expect(page).to have_content existing_contact.site_plan_request
-  expect(page).to have_content existing_contact.search_report
-  expect(page).to have_content existing_contact.search_report_request
-  expect(page).to have_content existing_contact.valuation_report
-  expect(page).to have_content existing_contact.valuation_report_request
-  expect(page).to have_content existing_contact.type_of_service
-  expect(page).to have_content existing_contact.request_details
-  expect(page).to have_content existing_contact.request_date.strftime('%Y')
-  expect(page).to have_content existing_contact.request_date.strftime('%B')
-  expect(page).to have_content existing_contact.request_date.strftime('%-d')
-  expect(page).to have_content existing_contact.client_signature
   expect(page).to have_content existing_contact.broker.full_name
-  expect(page).to have_content existing_contact.signature_of_authorized_broker
 end
