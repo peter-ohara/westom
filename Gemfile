@@ -44,6 +44,7 @@ gem 'jquery-rails'
 gem 'jquery-datatables'
 
 gem 'haml'
+gem 'haml-rails', '~> 1.0'
 gem 'simple_form'
 
 group :development, :test do
