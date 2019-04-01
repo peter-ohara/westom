@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :properties
-  resources :contacts
+  resources :contacts do
+    resources :properties, shallow: true
+  end
+  resources :properties, only: [:index]
   resources :users
-  get 'welcome/index'
-
   root 'welcome#index'
 end

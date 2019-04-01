@@ -13,7 +13,8 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
-    @property = Property.new
+    @contact = Contact.find params[:contact_id]
+    @property = @contact.properties.new
   end
 
   # GET /properties/1/edit
@@ -22,12 +23,13 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
-    @property = Property.new(property_params)
+    @contact = Contact.find params[:contact_id]
+    @property = @contact.properties.new(property_params)
 
     respond_to do |format|
       if @property.save
-        format.html { redirect_to @property, notice: 'Property was successfully created.' }
-        format.json { render :show, status: :created, location: @property }
+        format.html { redirect_to @contact, notice: 'Property was successfully created.' }
+        format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
         format.json { render json: @property.errors, status: :unprocessable_entity }
@@ -52,9 +54,10 @@ class PropertiesController < ApplicationController
   # DELETE /properties/1
   # DELETE /properties/1.json
   def destroy
+    @contact = @property.contact
     @property.destroy
     respond_to do |format|
-      format.html { redirect_to properties_url, notice: 'Property was successfully deleted.' }
+      format.html { redirect_to @contact, notice: 'Property was successfully deleted.' }
       format.json { head :no_content }
     end
   end
