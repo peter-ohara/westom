@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190329072218) do
+ActiveRecord::Schema.define(version: 20190401202542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,23 @@ ActiveRecord::Schema.define(version: 20190329072218) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
+  create_table "deals", force: :cascade do |t|
+    t.bigint "contact_id"
+    t.bigint "property_id"
+    t.integer "type_of_service"
+    t.date "request_date"
+    t.text "request_details"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "USD", null: false
+    t.date "deadline"
+    t.integer "stage"
+    t.date "expiration_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_deals_on_contact_id"
+    t.index ["property_id"], name: "index_deals_on_property_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -65,5 +82,7 @@ ActiveRecord::Schema.define(version: 20190329072218) do
   end
 
   add_foreign_key "contacts", "users"
+  add_foreign_key "deals", "contacts"
+  add_foreign_key "deals", "properties"
   add_foreign_key "properties", "contacts"
 end

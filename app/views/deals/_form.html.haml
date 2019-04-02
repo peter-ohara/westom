@@ -1,0 +1,11 @@
+= simple_form_for [@property, @deal] do |f|
+  = f.error_notification
+  = f.association :contact, label_method: :full_name, value_method: :id
+  = f.input :type_of_service, collection: Deal.type_of_services.keys.map {|service| [service.titleize, service]}
+  = f.input :request_date
+  = f.input :request_details
+  = f.input :amount
+  = f.input :deadline
+  = f.input :stage, collection: Deal.stages.keys.map {|stage| [stage.titleize, stage]}
+  = f.input :expiration_date, start_year: @deal.request_date&.year || Date.today.year, end_year: Date.today.year + 100
+  = f.button :submit, class: 'btn-primary'

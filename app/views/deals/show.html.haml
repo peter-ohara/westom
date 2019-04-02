@@ -1,0 +1,44 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Deals', deals_path
+  %li.breadcrumb-item.active
+    = @deal.deal_number
+
+
+%h2.h6 Details
+= render layout: 'layouts/card_with_body' do
+  %dl.row
+    %dt.col-md-2 Deal Number
+    %dd.col-md-10=  @deal.deal_number
+
+    %dt.col-md-2 Client
+    %dd.col-md-10= link_to @deal.contact.full_name, @deal.contact
+
+    %dt.col-md-2 Property
+    %dd.col-md-10= link_to @deal.property.full_name, @deal.property
+
+    %dt.col-md-2 Type of service
+    %dd.col-md-10= @deal.type_of_service.titleize
+
+    %dt.col-md-2 Request date
+    %dd.col-md-9= @deal.request_date.to_formatted_s(:long)
+
+    %dt.col-md-2 Request details
+    %dd.col-md-10= @deal.request_details
+
+    %dt.col-md-2 Amount
+    %dd.col-md-10= humanized_money_with_symbol @deal.amount
+
+    %dt.col-md-2 Deadline
+    %dd.col-md-9= @deal.deadline.to_formatted_s(:long)
+
+    %dt.col-md-2 Stage
+    %dd.col-md-10= @deal.stage.titleize
+
+    %dt.col-md-2 Expiration date
+    %dd.col-md-9= @deal.expiration_date.to_formatted_s(:long)
+
+  = link_to 'EDIT', edit_deal_path(@deal), class: 'card-link'
+  = link_to 'DELETE', @deal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'

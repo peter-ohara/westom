@@ -55,3 +55,15 @@
         %p.mb-1= property.description
         %p.mb-1= "Location: #{property.location}"
         %small= property.category.titleize
+
+%h2.h6 Deals
+= render layout: 'layouts/card' do
+  .list-group.list-group-flush#deals
+    - @contact.deals.each do |deal|
+      = link_to deal, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= deal.name
+          %small= deal.stage.titleize
+        %p.mb-1= humanized_money_with_symbol deal.amount
+        %p.mb-1= deal.property.full_name
+        %small= "Deadline: #{time_ago_in_words deal.deadline}"

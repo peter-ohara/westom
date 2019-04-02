@@ -8,5 +8,8 @@
 require 'factory_bot_rails'
 
 100.times do
-  FactoryBot.create :property
+  property = FactoryBot.create :property
+  rand(1...10).times do
+    FactoryBot.create :deal, property: property
+  end
 end

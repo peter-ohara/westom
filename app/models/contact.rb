@@ -5,6 +5,7 @@ class Contact < ApplicationRecord
              inverse_of: :contacts
 
   has_many :properties, inverse_of: :contact
+  has_many :deals, inverse_of: :contact
   accepts_nested_attributes_for :properties,
                                 allow_destroy: true,
                                 reject_if: :all_blank

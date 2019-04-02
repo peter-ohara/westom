@@ -1,0 +1,11 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Deals', deals_path
+  %li.breadcrumb-item
+    = link_to @deal.deal_number, @deal
+  %li.breadcrumb-item.active
+    Edit
+
+= render partial: 'form', layout: 'layouts/card_with_body'
