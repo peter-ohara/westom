@@ -49,6 +49,8 @@ gem 'simple_form'
 
 gem 'money-rails', '~>1.12'
 
+gem 'factory_bot_rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -58,7 +60,6 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.8'
 
-  gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 
   gem 'capybara-screenshot'
