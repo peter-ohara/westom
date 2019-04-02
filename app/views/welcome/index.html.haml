@@ -10,7 +10,7 @@
         .row.no-gutters.align-items-center
           .col.mr-2
             .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 Earnings (#{Date.today.strftime("%Y")})
-            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 10).to_money.format
+            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 1000).to_money.format
           .col-auto
             %i.fas.fa-calendar.fa-2x.text-gray-300
   / Earnings (Monthly) Card Example
@@ -20,7 +20,7 @@
         .row.no-gutters.align-items-center
           .col.mr-2
             .text-xs.font-weight-bold.text-success.text-uppercase.mb-1 Revenue (#{Date.today.strftime("%Y")})
-            .h5.mb-0.font-weight-bold.text-gray-800= Deal.closed.last_year.sum('amount_cents').to_money.format
+            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 100).to_money.format
           .col-auto
             %i.fas.fa-dollar-sign.fa-2x.text-gray-300
   / Deals Closed Card Example
