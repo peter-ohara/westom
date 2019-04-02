@@ -2,10 +2,122 @@
   %li.breadcrumb-item.active
     Home
 
-%ul
-  %li
-    = link_to 'Users', users_path
-  %li
-    = link_to 'Contacts', contacts_path
-  %li
-    = link_to 'Properties', properties_path
+.row
+  / Earnings (Monthly) Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-primary.shadow.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 Earnings (#{Date.today.strftime("%Y")})
+            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 10).to_money.format
+          .col-auto
+            %i.fas.fa-calendar.fa-2x.text-gray-300
+  / Earnings (Monthly) Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-success.shadow.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-success.text-uppercase.mb-1 Revenue (#{Date.today.strftime("%Y")})
+            .h5.mb-0.font-weight-bold.text-gray-800= Deal.closed.last_year.sum('amount_cents').to_money.format
+          .col-auto
+            %i.fas.fa-dollar-sign.fa-2x.text-gray-300
+  / Deals Closed Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-info.shadow.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-info.text-uppercase.mb-1 Deals closed
+            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where(stage: :closed).count
+          .col-auto
+            %i.fas.fa-trophy.fa-2x.text-gray-300
+  / Deals Pending Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-warning.shadow.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1 Deals Pending
+            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where.not(stage: :closed).count
+          .col-auto
+            %i.fas.fa-circle-notch.fa-2x.text-gray-300
+/ Content Row
+.row
+  / Area Chart
+  .col-xl-6.col-lg-12
+    .card.shadow.mb-4
+      / Card Header - Dropdown
+      .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+        %h6.m-0.font-weight-bold.text-primary Deals Funnel
+        .dropdown.no-arrow
+          %a#dropdownMenuLink2.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+            %i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+          .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in{"aria-labelledby" => "dropdownMenuLink"}
+            .dropdown-header Dropdown Header:
+            %a.dropdown-item{href: "#"} Action
+            %a.dropdown-item{href: "#"} Another action
+            .dropdown-divider
+            %a.dropdown-item{href: "#"} Something else here
+      / Card Body
+      .card-body
+        .chart-area
+          = deal_funnel 'myAreaChart'
+
+  / Pie Chart
+  .col-xl-3.col-lg-6
+    .card.shadow.mb-4
+      / Card Header - Dropdown
+      .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+        %h6.m-0.font-weight-bold.text-primary Deals by Category
+        .dropdown.no-arrow
+          %a#dropdownMenuLink.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+            %i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+          .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in{"aria-labelledby" => "dropdownMenuLink"}
+            .dropdown-header Dropdown Header:
+            %a.dropdown-item{href: "#"} Action
+            %a.dropdown-item{href: "#"} Another action
+            .dropdown-divider
+            %a.dropdown-item{href: "#"} Something else here
+      / Card Body
+      .card-body
+        .chart-pie.pt-4.pb-2
+          = deal_break_down_by_category 'myPieChart'
+        .mt-4.text-center.small
+          %span.mr-2
+            %i.fas.fa-circle.text-primary
+            Residential
+          %span.mr-2
+            %i.fas.fa-circle.text-success
+            Commercial
+
+  / Pie Chart
+  .col-xl-3.col-lg-6
+    .card.shadow.mb-4
+      / Card Header - Dropdown
+      .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+        %h6.m-0.font-weight-bold.text-primary Deals by Property Type
+        .dropdown.no-arrow
+          %a#dropdownMenuLink.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+            %i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+          .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in{"aria-labelledby" => "dropdownMenuLink"}
+            .dropdown-header Dropdown Header:
+            %a.dropdown-item{href: "#"} Action
+            %a.dropdown-item{href: "#"} Another action
+            .dropdown-divider
+            %a.dropdown-item{href: "#"} Something else here
+      / Card Body
+      .card-body
+        .chart-pie.pt-4.pb-2
+          = deal_break_down_by_property_type 'myPieChart2'
+        .mt-4.text-center.small
+          %span.mr-2
+            %i.fas.fa-circle.text-primary
+            Land
+          %span.mr-2
+            %i.fas.fa-circle.text-success
+            House
+          %span.mr-2
+            %i.fas.fa-circle.text-info
+            Apartment

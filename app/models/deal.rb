@@ -16,7 +16,20 @@ class Deal < ApplicationRecord
                 negotiation: 2,
                 sales_purchase_agreement: 3,
                 amount_paid: 4,
-                deal_closed: 5 }
+                closed: 5,
+                cancelled: 6 }
+
+  scope :last_month, -> {
+                       where('request_date > ? AND request_date < ?',
+                             Date.today.last_month.beginning_of_month,
+                             Date.today.beginning_of_month)
+                     }
+
+  scope :last_year, -> {
+    where('request_date > ? AND request_date < ?',
+          Date.today.beginning_of_year,
+          Date.today)
+  }
 
   def deal_number
     id
