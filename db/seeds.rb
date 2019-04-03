@@ -7,9 +7,21 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_bot_rails'
 
-100.times do
-  property = FactoryBot.create :property
-  rand(1...10).times do
-    FactoryBot.create :deal, property: property
+brokers = []
+clients = []
+8.times { brokers.push FactoryBot.create :user }
+
+brokers.each do |broker|
+  rand(10...20).times do
+    clients.push FactoryBot.create :contact, broker: broker
+  end
+end
+
+clients.each do |client|
+  rand(1...3).times do
+    property = FactoryBot.create :property, contact: client
+    rand(0..2).times do
+      FactoryBot.create :deal, property: property, contact: clients.sample
+    end
   end
 end
