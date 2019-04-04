@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :property do
-    name { "#{Faker::Number.digit} bedroom house at #{Faker::Address.community} with #{Faker::Number.digit} #{Faker::House.room}s and #{Faker::Number.digit} #{Faker::House.room}s" }
+    name { "#{(1...9).to_a.sample} bedroom house at #{Faker::Address.community} with #{(1...9).to_a.sample} #{Faker::House.room}s and #{(1...9).to_a.sample} #{Faker::House.room}s" }
     description { Faker::Lorem.paragraph }
     location { Faker::Address.full_address }
     category { [0, 1].sample }
