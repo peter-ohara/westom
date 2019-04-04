@@ -5,7 +5,7 @@ FactoryBot.define do
     type_of_service { [0, 1, 2, 3, 4, 5].sample }
     request_date { Faker::Date.between(5.years.ago, Date.today) }
     request_details { Faker::Lorem.paragraph }
-    amount_cents { rand(100_000...100_000_000) }
+    amount { rand(2000...1000_000) }
 
     deadline do
       Faker::Date.between(request_date + 1.week, request_date + 3.months)

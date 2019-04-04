@@ -14,12 +14,22 @@
             %th Contact
             %th Property
             %th Type of service
-            %th Amount cents
+            %th Amount
             %th Request date
             %th Deadline
             %th Stage
             %th Expiration date
-
+        %tfoot
+          %tr
+            %th Deal Number
+            %th Contact
+            %th Property
+            %th Type of service
+            %th Amount
+            %th Request date
+            %th Deadline
+            %th Stage
+            %th Expiration date
         %tbody
           - @deals.each do |deal|
             %tr
