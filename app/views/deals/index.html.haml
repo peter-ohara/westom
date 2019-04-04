@@ -38,7 +38,11 @@
               %td= link_to deal.property.name, deal.property
               %td= deal.type_of_service.titleize
               %td= humanized_money_with_symbol deal.amount
-              %td= deal.request_date.to_formatted_s(:long)
-              %td= deal.deadline.to_formatted_s(:long)
-              %td= deal.stage.titleize
-              %td= deal.expiration_date.to_formatted_s(:long)
+              %td{ data: {sort: deal.request_date.strftime("%Y%m%d%H%M%s") } }
+                = deal.request_date.to_formatted_s(:long)
+              %td{ data: {sort: deal.deadline.strftime("%Y%m%d%H%M%s") } }
+                = deal.deadline.to_formatted_s(:long)
+              %td{ data: {sort: deal.stage_before_type_cast } }
+                = deal.stage.titleize
+              %td{ data: {sort: deal.expiration_date.strftime("%Y%m%d%H%M%s") } }
+                = deal.expiration_date.to_formatted_s(:long)

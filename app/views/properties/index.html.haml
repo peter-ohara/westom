@@ -30,6 +30,8 @@
               %td= link_to property.name, property
               %td= property.description
               %td= property.location
-              %td= property.category.titleize
-              %td= property.property_type.titleize
+              %td{ data: {sort: property.category_before_type_cast } }
+                = property.category.titleize
+              %td{ data: {sort: property.property_type_before_type_cast } }
+                = property.property_type.titleize
               %td= link_to property.contact.full_name, property.contact
