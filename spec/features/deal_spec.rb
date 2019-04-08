@@ -10,6 +10,11 @@ RSpec.feature 'Deal Management', js: true do
     FactoryBot.create(:deal, contact: contact, property: property)
   end
 
+  let!(:user) { FactoryBot.create(:user) }
+  before :each do
+    login_as user
+  end
+
   scenario 'should add a deal to a property' do
     visit property_path property
     click_link 'Add New Deal'

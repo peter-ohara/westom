@@ -8,6 +8,11 @@ RSpec.feature 'Contact Management', js: true do
   let!(:contact) { FactoryBot.build(:contact) }
   let!(:existing_contact) { FactoryBot.create(:contact, broker: broker1) }
 
+  let!(:user) { FactoryBot.create(:user) }
+  before :each do
+    login_as user
+  end
+
   scenario 'should add a contact (lead or client)' do
     visit contacts_path
     click_link 'Add New Contact'

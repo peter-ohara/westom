@@ -8,6 +8,11 @@ RSpec.feature 'Property Management', js: true do
   let!(:property) { FactoryBot.build(:property) }
   let!(:existing_property) { FactoryBot.create(:property, contact: contact1) }
 
+  let!(:user) { FactoryBot.create(:user) }
+  before :each do
+    login_as user
+  end
+
   scenario 'should be able to add a property to a contact' do
     visit contact_path contact1
 
