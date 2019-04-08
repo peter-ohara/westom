@@ -65,6 +65,7 @@ def fill_out_property_information(property)
 
   select property.category.titleize, from: 'property_category'
   select property.property_type.titleize, from: 'property_property_type'
+  select property.listing_type.titleize, from: 'property_listing_type'
 end
 
 def expect_page_to_have_property_information(page, existing_property)
@@ -73,5 +74,6 @@ def expect_page_to_have_property_information(page, existing_property)
   expect(page).to have_content existing_property.location
   expect(page).to have_content existing_property.category.titleize
   expect(page).to have_content existing_property.property_type.titleize
+  expect(page).to have_content existing_property.listing_type.titleize
   expect(page).to have_content existing_property.contact.full_name
 end

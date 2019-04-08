@@ -15,6 +15,7 @@
             %th Location
             %th Category
             %th Property type
+            %th Listing type
             %th Owner/Agent
         %tfoot
           %tr
@@ -23,6 +24,7 @@
             %th Location
             %th Category
             %th Property type
+            %th Listing type
             %th Owner/Agent
         %tbody
           - @properties.each do |property|
@@ -34,4 +36,6 @@
                 = property.category.titleize
               %td{ data: {sort: property.property_type_before_type_cast } }
                 = property.property_type.titleize
+              %td{ data: {sort: property.listing_type_before_type_cast } }
+                = property.listing_type.titleize
               %td= link_to property.contact.full_name, property.contact

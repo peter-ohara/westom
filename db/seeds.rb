@@ -25,3 +25,8 @@ clients.each do |client|
     end
   end
 end
+
+User.create(first_name: 'Peter',
+            last_name: 'Adu',
+            email: 'ohara.invent@gmail.com',
+            password: 'password')
