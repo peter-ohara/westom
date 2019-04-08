@@ -4,7 +4,7 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
+    @properties = Property.filter(params.slice(:listing_type))
   end
 
   # GET /properties/1

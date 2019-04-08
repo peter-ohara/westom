@@ -29,6 +29,7 @@
     <orderEntry type="library" scope="PROVIDED" name="actionmailer (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionpack (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="actionview (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="active_link_to (v1.0.5, rbenv: 2.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activejob (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v5.1.7, rbenv: 2.4.2) [gem]" level="application" />
