@@ -1,0 +1,18 @@
+.row
+  .col-lg-6.d-none.d-lg-block.bg-password-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-2 Resend unlock instructions
+        %p.mb-4 Didn't receive unlock instructions. Just enter your email address below and we'll resend you instructions to unlock your account!
+        = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+          = f.error_notification
+          = f.full_error :unlock_token
+          .form-inputs
+            = f.input :email,                       |
+              required: true,                       |
+              autofocus: true,
+              input_html: { autocomplete: "email" }
+          .form-actions
+            = f.button :submit, "Resend unlock instructions", class: 'btn-primary btn-block mb-2'
+        = render "devise/shared/links"

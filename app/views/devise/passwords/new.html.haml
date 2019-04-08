@@ -1,0 +1,19 @@
+.row
+  .col-lg-6.d-none.d-lg-block.bg-password-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-2 Forgot Your Password?
+        %p.mb-4 We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email,                       |
+            required: true,                       |
+            autofocus: true,
+            input_html: { autocomplete: "email" }
+        .form-actions
+          = f.button :submit, 'Send me reset password instructions', class: 'btn-primary btn-block mb-2'
+      = render "devise/shared/links"
+
+

@@ -1,0 +1,23 @@
+/ Nested Row within Card Body
+.row
+  .col-lg-6.d-none.d-lg-block.bg-login-image
+  .col-lg-6
+    .p-5
+      .text-center
+        %h1.h4.text-gray-900.mb-4 Welcome Back!
+
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-inputs
+          = f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }
+          = f.input :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password" }
+          = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+
+        .form-actions
+          = f.button :submit, "Log in", class: 'btn-primary btn-block mb-2'
+
+      = render "devise/shared/links"
