@@ -17,12 +17,15 @@
           %tr
             %th First name
             %th Last name
+            %th Email
         %tfoot
           %tr
             %th First name
             %th Last name
+            %th Email
         %tbody
           - @users.each do |user|
             %tr
               %td= link_to user.first_name, user
               %td= user.last_name
+              %td= user.email

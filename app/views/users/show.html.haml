@@ -6,7 +6,6 @@
   %li.breadcrumb-item.active
     = @user.full_name
 
-
 %h2.h6 Details
 = render layout: 'layouts/card_with_body' do
   %dl.row
@@ -15,6 +14,9 @@
 
     %dt.col-md-3 Last name
     %dd.col-md-9= @user.last_name
+
+    %dt.col-md-3 Email
+    %dd.col-md-9= @user.email
 
   = link_to 'Edit', edit_user_path(@user), class: 'card-link'
   = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
