@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :contacts do
     resources :properties, shallow: true
   end
