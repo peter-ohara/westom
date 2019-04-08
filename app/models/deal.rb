@@ -1,4 +1,6 @@
 class Deal < ApplicationRecord
+  include Filterable
+
   monetize :amount_cents
 
   belongs_to :contact, inverse_of: :deals
@@ -18,6 +20,14 @@ class Deal < ApplicationRecord
                 amount_paid: 4,
                 closed: 5,
                 cancelled: 6 }
+
+  scope :stage_higher_than, ->(stage) {
+    where('stage > ? AND stage < 5', stage)
+  }
+
+  scope :expires_by, ->(date) {
+    where('expiration_date < ?', date)
+  }
 
   scope :last_month, -> {
                        where('request_date > ? AND request_date < ?',

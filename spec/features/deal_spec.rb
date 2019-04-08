@@ -92,6 +92,31 @@ RSpec.feature 'Deal Management', js: true do
       expect(page).to have_link, href: deal_path(existing_deal)
     end
   end
+
+  scenario 'should be able to filter for properties that are for sale ' \
+           'or for lease' do
+    properties = FactoryBot.create_list(:property, 25)
+
+    visit properties_path
+
+    click_link 'Properties for Sale'
+    expect(page).to have_link href: properties_path(listing_type: :for_sale), class: 'nav-item nav-link active'
+    expect_each_property_to_have_listing_type('For Sale')
+    expect(page).to have_current_path properties_path(listing_type: :for_sale)
+
+    click_link 'Properties for Lease'
+    expect(page).to have_link href: properties_path(listing_type: :for_lease), class: 'nav-item nav-link active'
+    expect_each_property_to_have_listing_type('For Lease')
+    expect(page).to have_current_path properties_path(listing_type: :for_lease)
+
+    click_link 'All Properties'
+    expect(page).to have_link href: properties_path, class: 'nav-item nav-link active'
+    select '100', from: 'dttb-properties_length'
+
+    # properties.count + 1 because another property was created using let! above
+    expect(page.all('#dttb-properties tbody tr td.listing_type').count).to eq properties.count + 1
+    expect(page).to have_current_path properties_path
+  end
 end
 
 def fill_out_deal_information(deal, contact)
@@ -135,4 +160,10 @@ def expect_page_to_have_deal_information(page, existing_deal)
   expect(page).to have_content existing_deal.stage.titleize
 
   expect(page).to have_content existing_deal.expiration_date.to_formatted_s(:long)
+end
+
+def expect_each_property_to_have_listing_type(listing_type)
+  page.all('#dttb-properties tbody tr td.listing_type').each do |td|
+    expect(td).to have_text listing_type
+  end
 end

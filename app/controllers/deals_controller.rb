@@ -4,7 +4,7 @@ class DealsController < ApplicationController
   # GET /deals
   # GET /deals.json
   def index
-    @deals = Deal.all
+    @deals = Deal.filter(params.slice(:expires_by, :stage_higher_than))
   end
 
   # GET /deals/1
