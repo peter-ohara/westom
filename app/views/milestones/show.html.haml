@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @milestone.title
+%p
+  %b Start date:
+  = @milestone.start_date
+%p
+  %b Due date:
+  = @milestone.due_date
+%p
+  %b Description:
+  = @milestone.description
+%p
+  %b Target type:
+  = @milestone.target_type
+%p
+  %b Target:
+  = @milestone.target
+%p
+  %b Department:
+  = @milestone.department
+%p
+  %b Status:
+  = @milestone.status
+
+= link_to 'Edit', edit_milestone_path(@milestone)
+\|
+= link_to 'Back', milestones_path

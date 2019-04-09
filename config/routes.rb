@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :milestones
   devise_for :users
   resources :contacts do
     resources :properties, shallow: true
