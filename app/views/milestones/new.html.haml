@@ -1,5 +1,9 @@
-%h1 New milestone
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Milestones', milestones_path
+  %li.breadcrumb-item.active
+    New
 
-= render 'form'
-
-= link_to 'Back', milestones_path
+= render partial: 'form', layout: 'layouts/card_with_body'

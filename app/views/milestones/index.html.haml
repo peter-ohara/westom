@@ -1,35 +1,52 @@
-%h1 Listing milestones
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item.active
+    Milestones
 
-%table
-  %thead
-    %tr
-      %th Title
-      %th Start date
-      %th Due date
-      %th Description
-      %th Target type
-      %th Target
-      %th Department
-      %th Status
-      %th
-      %th
-      %th
+= content_for :actions do
+  %nav.nav.nav-pills
+    = active_link_to 'All Milestones', milestones_path, class: 'nav-item nav-link', active: :exact
+    = active_link_to 'Milestones reached', milestones_path(reached: :true), class: 'nav-item  nav-link', active: :exact
+    = active_link_to 'Milestones not reached', milestones_path(reached: :false), class: 'nav-item  nav-link', active: :exact
 
-  %tbody
-    - @milestones.each do |milestone|
-      %tr
-        %td= milestone.title
-        %td= milestone.start_date
-        %td= milestone.due_date
-        %td= milestone.description
-        %td= milestone.target_type
-        %td= milestone.target
-        %td= milestone.department
-        %td= milestone.status
-        %td= link_to 'Show', milestone
-        %td= link_to 'Edit', edit_milestone_path(milestone)
-        %td= link_to 'Destroy', milestone, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Milestone', new_milestone_path
+.card.shadow-sm.mb-4
+  .card-body
+    .table-responsive
+      %table#dttb-milestones.table.table-sm.table-hover{cellspacing: "0", width: "100%"}
+        %thead
+          %tr
+            %th Title
+            %th Start date
+            %th Due date
+            %th Description
+            %th Target type
+            %th Target
+            %th Department
+            %th Status
+        %tfoot
+          %tr
+            %th Title
+            %th Start date
+            %th Due date
+            %th Description
+            %th Target type
+            %th Target
+            %th Department
+            %th Status
+        %tbody
+          - @milestones.each do |milestone|
+            %tr
+              %td= link_to milestone.title, milestone
+              %td{ data: {sort: milestone.start_date.strftime("%Y%m%d%H%M%s") } }
+                = milestone.start_date.to_formatted_s(:long)
+              %td{ data: {sort: milestone.due_date.strftime("%Y%m%d%H%M%s") } }
+                = milestone.due_date.to_formatted_s(:long)
+              %td= milestone.description
+              %td{ data: {sort: milestone.target_type_before_type_cast } }
+                = milestone.target_type.titleize
+              %td= format_target milestone
+              %td{ data: {sort: milestone.department_before_type_cast } }
+                = milestone.department.titleize
+              %td.status{ data: {sort: milestone.status_before_type_cast } }
+                = milestone.status.titleize

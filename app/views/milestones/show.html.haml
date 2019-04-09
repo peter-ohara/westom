@@ -1,30 +1,64 @@
-%p#notice= notice
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Milestones', milestones_path
+  %li.breadcrumb-item.active
+    = @milestone.title
 
-%p
-  %b Title:
-  = @milestone.title
-%p
-  %b Start date:
-  = @milestone.start_date
-%p
-  %b Due date:
-  = @milestone.due_date
-%p
-  %b Description:
-  = @milestone.description
-%p
-  %b Target type:
-  = @milestone.target_type
-%p
-  %b Target:
-  = @milestone.target
-%p
-  %b Department:
-  = @milestone.department
-%p
-  %b Status:
-  = @milestone.status
+%h2.h6 Details
+= render layout: 'layouts/card_with_body' do
+  .row.no-gutters.align-items-center.mb-4
+    .col.mr-2
+      .text-xs.font-weight-bold.text-info.text-uppercase.mb-1= @milestone.target_name
+      .row.no-gutters.align-items-center
+        .col-auto
+          .h5.mb-0.mr-3.font-weight-bold.text-gray-800= milestone_fraction @milestone
+        .col
+          .progress.progress-sm.mr-2
+            .progress-bar.bg-info{"aria-valuemax" => @milestone.target,
+            "aria-valuemin" => 0,
+            "aria-valuenow" => @milestone.progress,
+            role: "progressbar",
+            style: "width: #{milestone_percentage @milestone}"}
 
-= link_to 'Edit', edit_milestone_path(@milestone)
-\|
-= link_to 'Back', milestones_path
+  %dl.row
+    %dt.col-md-2 Title
+    %dd.col-md-10= @milestone.title
+
+    %dt.col-md-2 Start date
+    %dd.col-md-10= @milestone.start_date.to_formatted_s(:long)
+
+    %dt.col-md-2 Due date
+    %dd.col-md-10= @milestone.due_date.to_formatted_s(:long)
+
+    %dt.col-md-2 Description
+    %dd.col-md-10= @milestone.description
+
+    %dt.col-md-2 Target Type
+    %dd.col-md-10= @milestone.target_type.titleize
+
+    %dt.col-md-2 Target
+    %dd.col-md-10= @milestone.target
+
+    %dt.col-md-2 Department
+    %dd.col-md-10= @milestone.department.titleize
+
+    %dt.col-md-2 Status
+    %dd.col-md-10= @milestone.status.titleize
+
+  = link_to 'EDIT', edit_milestone_path(@milestone), class: 'card-link'
+  = link_to 'DELETE', @milestone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+
+%h2.h6 Deals
+= render layout: 'layouts/card' do
+  .list-group.list-group-flush#deals
+    - @milestone.deals.each do |deal|
+      = link_to deal, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= deal.name
+          %small= deal.stage.titleize
+        %p.mb-1= humanized_money_with_symbol deal.amount
+        %p.mb-1= deal.contact.full_name
+        %small= "Deadline: #{time_ago_in_words deal.deadline}"
+
