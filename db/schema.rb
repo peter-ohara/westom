@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190409064429) do
+ActiveRecord::Schema.define(version: 20190409081719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20190409064429) do
     t.date "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_of_closing"
     t.index ["contact_id"], name: "index_deals_on_contact_id"
     t.index ["property_id"], name: "index_deals_on_property_id"
   end

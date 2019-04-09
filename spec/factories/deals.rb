@@ -5,13 +5,17 @@ FactoryBot.define do
     type_of_service { [0, 1, 2, 3, 4, 5].sample }
     request_date { Faker::Date.between(5.years.ago, Date.today) }
     request_details { Faker::Lorem.paragraph }
-    amount { rand(2000...1000_000) }
+    amount { rand(2000...1_000_000) }
 
     deadline do
       Faker::Date.between(request_date + 1.week, request_date + 3.months)
     end
 
     stage { [0, 1, 2, 3, 4, 5, 6].sample }
+
+    date_of_closing do
+      [Faker::Date.between(request_date + 1.week, request_date + 3.months), nil].sample
+    end
 
     expiration_date do
       case type_of_service

@@ -24,6 +24,7 @@
             %th Request date
             %th Deadline
             %th Stage
+            %th Date of closing
             %th Expiration date
         %tfoot
           %tr
@@ -35,6 +36,7 @@
             %th Request date
             %th Deadline
             %th Stage
+            %th Date of closing
             %th Expiration date
         %tbody
           - @deals.each do |deal|
@@ -50,5 +52,7 @@
                 = deal.deadline.to_formatted_s(:long)
               %td{ data: {sort: deal.stage_before_type_cast } }
                 = deal.stage.titleize
+              %td{ data: {sort: deal.date_of_closing&.strftime("%Y%m%d%H%M%s") } }
+                = deal.date_of_closing&.to_formatted_s(:long)
               %td{ data: {sort: deal.expiration_date.strftime("%Y%m%d%H%M%s") } }
                 = deal.expiration_date.to_formatted_s(:long)

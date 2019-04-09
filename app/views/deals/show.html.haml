@@ -37,6 +37,9 @@
     %dt.col-md-2 Stage
     %dd.col-md-10= @deal.stage.titleize
 
+    %dt.col-md-2 Date of closing
+    %dd.col-md-9= @deal.date_of_closing&.to_formatted_s(:long)
+
     %dt.col-md-2 Expiration date
     %dd.col-md-9= @deal.expiration_date.to_formatted_s(:long)
 

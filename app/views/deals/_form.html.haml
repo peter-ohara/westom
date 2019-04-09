@@ -7,5 +7,6 @@
   = f.input :amount
   = f.input :deadline
   = f.input :stage, collection: Deal.stages.keys.map {|stage| [stage.titleize, stage]}
+  = f.input :date_of_closing, start_year: @deal.request_date&.year || Date.today.year, end_year: Date.today.year + 100
   = f.input :expiration_date, start_year: @deal.request_date&.year || Date.today.year, end_year: Date.today.year + 100
   = f.button :submit, class: 'btn-primary'
