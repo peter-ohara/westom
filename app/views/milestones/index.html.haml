@@ -7,8 +7,13 @@
 = content_for :actions do
   %nav.nav.nav-pills
     = active_link_to 'All Milestones', milestones_path, class: 'nav-item nav-link', active: :exact
-    = active_link_to 'Milestones reached', milestones_path(reached: :true), class: 'nav-item  nav-link', active: :exact
-    = active_link_to 'Milestones not reached', milestones_path(reached: :false), class: 'nav-item  nav-link', active: :exact
+    = active_link_to 'Active', milestones_path(status: :active), class: 'nav-item  nav-link', active: :exact
+    = active_link_to 'Archived', milestones_path(status: :archived), class: 'nav-item  nav-link', active: :exact
+
+= content_for :actions do
+  = link_to new_milestone_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New Milestone
 
 .card.shadow-sm.mb-4
   .card-body

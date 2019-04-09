@@ -1,4 +1,6 @@
 class Milestone < ApplicationRecord
+  include Filterable
+
   enum target_type: { revenue: 0,
                       deals: 1 }
 
@@ -8,6 +10,8 @@ class Milestone < ApplicationRecord
 
   enum status: { active: 0,
                  archived: 1 }
+
+  scope :status, ->(status) { where status: status }
 
   def deals
     Deal.closed.where('date_of_closing > ? AND date_of_closing < ?', start_date, due_date)

@@ -4,7 +4,7 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.json
   def index
-    @milestones = Milestone.all
+    @milestones = Milestone.filter(params.slice(:status))
   end
 
   # GET /milestones/1
