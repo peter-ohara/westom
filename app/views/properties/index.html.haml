@@ -4,7 +4,7 @@
   %li.breadcrumb-item.active
     Properties
 
-= content_for :actions do
+= content_for :filters do
   %nav.nav.nav-pills
     = active_link_to 'All Properties', properties_path, class: 'nav-item nav-link', active: :exact
     = active_link_to 'Properties for Sale', properties_path(listing_type: :for_sale), class: 'nav-item  nav-link', active: :exact

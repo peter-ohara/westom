@@ -28,6 +28,10 @@
             / Sidebar Toggle (Topbar)
             %button#sidebarToggleTop.btn.btn-link.d-md-none.rounded-circle.mr-3
               %i.fa.fa-bars
+            / Breadcrumbs
+            %nav
+              %ol.breadcrumb.bg-light.mt-3
+                = yield :breadcrumb
             / Topbar Navbar
             %ul.navbar-nav.ml-auto
               .topbar-divider.d-none.d-sm-block
@@ -53,10 +57,8 @@
           .container-fluid
             / Page Heading
             .d-sm-flex.align-items-center.justify-content-between.mb-4
-              -#%h1.h3.mb-0.text-gray-800
-              %nav
-                %ol.breadcrumb
-                  = yield :breadcrumb
+              %div
+                = yield :filters
               %div
                 = yield :actions
             - if notice

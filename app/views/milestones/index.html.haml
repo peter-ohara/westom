@@ -4,7 +4,7 @@
   %li.breadcrumb-item.active
     Milestones
 
-= content_for :actions do
+= content_for :filters do
   %nav.nav.nav-pills
     = active_link_to 'All Milestones', milestones_path, class: 'nav-item nav-link', active: :exact
     = active_link_to 'Active', milestones_path(status: :active), class: 'nav-item  nav-link', active: :exact

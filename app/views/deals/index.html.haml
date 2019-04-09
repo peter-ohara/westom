@@ -4,7 +4,7 @@
   %li.breadcrumb-item.active
     Deals
 
-= content_for :actions do
+= content_for :filters do
   %nav.nav.nav-pills
     = active_link_to 'All Deals', deals_path, class: 'nav-item nav-link', active: :exact
     = active_link_to 'About to expire', deals_path(expires_by: 1.year.from_now), class: 'nav-item  nav-link', active: /\?expires_by=/
