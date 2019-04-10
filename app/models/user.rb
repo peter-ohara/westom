@@ -10,6 +10,9 @@ class User < ApplicationRecord
          :lockable
   has_many :contacts, inverse_of: :broker
 
+  has_many :user_milestones, inverse_of: :user
+  has_many :milestones, through: :user_milestones
+
   def full_name
     "#{first_name} #{last_name}"
   end

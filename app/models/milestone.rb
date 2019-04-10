@@ -11,6 +11,9 @@ class Milestone < ApplicationRecord
   enum status: { active: 0,
                  archived: 1 }
 
+  has_many :user_milestones, inverse_of: :milestone
+  has_many :users, through: :user_milestones
+
   scope :status, ->(status) { where status: status }
 
   def deals
