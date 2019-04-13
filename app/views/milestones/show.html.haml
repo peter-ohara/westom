@@ -32,8 +32,9 @@
     %dt.col-md-2 Due date
     %dd.col-md-10= @milestone.due_date.to_formatted_s(:long)
 
-    %dt.col-md-2 Description
-    %dd.col-md-10= @milestone.description
+    - if @milestone.department
+      %dt.col-md-2 Description
+      %dd.col-md-10= @milestone.description
 
     %dt.col-md-2 Target Type
     %dd.col-md-10= @milestone.target_type.titleize
@@ -41,14 +42,24 @@
     %dt.col-md-2 Target
     %dd.col-md-10= @milestone.target
 
-    %dt.col-md-2 Department
-    %dd.col-md-10= @milestone.department.titleize
+    - if @milestone.department
+      %dt.col-md-2 Department
+      %dd.col-md-10= @milestone.department.titleize
 
     %dt.col-md-2 Status
     %dd.col-md-10= @milestone.status.titleize
 
   = link_to 'EDIT', edit_milestone_path(@milestone), class: 'card-link'
   = link_to 'DELETE', @milestone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+
+%h2.h6 Users
+= render layout: 'layouts/card' do
+  .list-group.list-group-flush#deals
+    - @milestone.users.each do |user|
+      = link_to user, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= user.full_name
+        %p.mb-1= user.email
 
 %h2.h6 Deals
 = render layout: 'layouts/card' do

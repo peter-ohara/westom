@@ -1,5 +1,5 @@
 class MilestonesController < ApplicationController
-  before_action :set_milestone, only: [:show, :edit, :update, :destroy]
+  before_action :set_milestone, only: %i[show edit update destroy]
 
   # GET /milestones
   # GET /milestones.json
@@ -9,8 +9,7 @@ class MilestonesController < ApplicationController
 
   # GET /milestones/1
   # GET /milestones/1.json
-  def show
-  end
+  def show; end
 
   # GET /milestones/new
   def new
@@ -18,8 +17,7 @@ class MilestonesController < ApplicationController
   end
 
   # GET /milestones/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /milestones
   # POST /milestones.json
@@ -62,13 +60,14 @@ class MilestonesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_milestone
-      @milestone = Milestone.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def milestone_params
-      params.require(:milestone).permit(:title, :start_date, :due_date, :description, :target_type, :target, :department, :status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_milestone
+    @milestone = Milestone.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def milestone_params
+    params.require(:milestone).permit(:title, :start_date, :due_date, :description, :target_type, :target, :department, :status, user_ids: [])
+  end
 end

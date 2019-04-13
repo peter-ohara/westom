@@ -24,20 +24,20 @@
             %th Title
             %th Start date
             %th Due date
-            %th Description
             %th Target type
             %th Target
             %th Department
+            %th Users
             %th Status
         %tfoot
           %tr
             %th Title
             %th Start date
             %th Due date
-            %th Description
             %th Target type
             %th Target
             %th Department
+            %th Users
             %th Status
         %tbody
           - @milestones.each do |milestone|
@@ -47,11 +47,12 @@
                 = milestone.start_date.to_formatted_s(:long)
               %td{ data: {sort: milestone.due_date.strftime("%Y%m%d%H%M%s") } }
                 = milestone.due_date.to_formatted_s(:long)
-              %td= milestone.description
               %td{ data: {sort: milestone.target_type_before_type_cast } }
                 = milestone.target_type.titleize
               %td= format_target milestone
               %td{ data: {sort: milestone.department_before_type_cast } }
-                = milestone.department.titleize
+                = milestone.department&.titleize
+              %td
+                != milestone.users.map {|user| link_to user.full_name, user}.join(', ')
               %td.status{ data: {sort: milestone.status_before_type_cast } }
                 = milestone.status.titleize
