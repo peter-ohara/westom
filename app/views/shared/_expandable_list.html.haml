@@ -1,0 +1,10 @@
+.card.mb-4
+  .list-group.list-group-flush
+    - collection.first(3).each do |item|
+      = capture(item, &block)
+  .list-group.list-group-flush.collapse{id: id}
+    - collection.first(3).each do |item|
+      = capture(item, &block)
+  .card-footer
+    %a.card-link(data-toggle="collapse" role="button"){ href: "##{id}"}
+      Expand
