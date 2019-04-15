@@ -231,11 +231,27 @@ module ApplicationHelper
     )
   end
 
-  def expandable_list(collection, preview_count=3, &block)
+  def expandable_list(collection, options, &block)
+    default_options = {
+      title: nil,
+      id: nil,
+      preview: 3,
+      more_id: "collapse-#{SecureRandom.uuid}"
+    }
+
+    options = options.reverse_merge(default_options)
+
     render partial: 'shared/expandable_list',
-           locals: { collection: collection,
-                     preview_count: preview_count,
-                     block: block,
-                     id: "collapse-#{SecureRandom.uuid}" }
+           locals: options.merge(collection: collection, block: block)
+  end
+
+  def card(title, &block)
+    render layout: 'shared/card',
+           locals: { title: title }, &block
+  end
+
+  def card_with_body(title, &block)
+    render layout: 'shared/card_with_body',
+           locals: { title: title }, &block
   end
 end

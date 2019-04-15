@@ -9,24 +9,21 @@
 
 .row
   .col-md-6
-    %h2.h6 Details
-    .card.mb-4.shadow-sm
-      .card-body
-        %dl.row
-          %dt.col-md-3 First name
-          %dd.col-md-9= @user.first_name
+    = card_with_body('Details') do
+      %dl.row
+        %dt.col-md-3 First name
+        %dd.col-md-9= @user.first_name
 
-          %dt.col-md-3 Last name
-          %dd.col-md-9= @user.last_name
+        %dt.col-md-3 Last name
+        %dd.col-md-9= @user.last_name
 
-          %dt.col-md-3 Email
-          %dd.col-md-9= @user.email
+        %dt.col-md-3 Email
+        %dd.col-md-9= @user.email
 
-        = link_to 'Edit', edit_user_path(@user), class: 'card-link'
-        = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+      = link_to 'Edit', edit_user_path(@user), class: 'card-link'
+      = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
-    %h2.h6 Clients
-    = expandable_list(@user.contacts) do |contact|
+    = expandable_list @user.contacts, title: 'Clients', id: 'clients' do |contact|
       = link_to contact, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= contact.full_name
@@ -36,8 +33,7 @@
         %p.mb-1= "Location: #{contact.present_address}"
 
   .col-md-6
-    %h2.h6 Deals
-    = expandable_list(@user.deals, 5) do |deal|
+    = expandable_list @user.deals, title: 'Deals', id: 'deals', preview: 5 do |deal|
       = link_to deal, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= deal.name

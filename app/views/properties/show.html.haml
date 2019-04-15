@@ -11,37 +11,36 @@
     %i.fas.fa-plus.fa-sm.text-white-50
     Add New Deal
 
-%h2.h6 Details
-= render layout: 'layouts/card_with_body' do
-  %dl.row
-    %dt.col-md-2 Name
-    %dd.col-md-10= @property.name
+.row
+  .col-md-6
+    = card_with_body('Details') do
+      %dl.row
+        %dt.col-md-3 Name
+        %dd.col-md-9= @property.name
 
-    %dt.col-md-2 Description
-    %dd.col-md-10= @property.description
+        %dt.col-md-3 Description
+        %dd.col-md-9= @property.description
 
-    %dt.col-md-2 Location
-    %dd.col-md-10= @property.location
+        %dt.col-md-3 Location
+        %dd.col-md-9= @property.location
 
-    %dt.col-md-2 Category
-    %dd.col-md-10= @property.category.titleize
+        %dt.col-md-3 Category
+        %dd.col-md-9= @property.category.titleize
 
-    %dt.col-md-2 Property Type
-    %dd.col-md-10= @property.property_type.titleize
+        %dt.col-md-3 Property Type
+        %dd.col-md-9= @property.property_type.titleize
 
-    %dt.col-md-2 Listing Type
-    %dd.col-md-10= @property.listing_type.titleize
+        %dt.col-md-3 Listing Type
+        %dd.col-md-9= @property.listing_type.titleize
 
-    %dt.col-md-2 Client
-    %dd.col-md-10= link_to @property.contact.full_name, @property.contact
+        %dt.col-md-3 Client
+        %dd.col-md-9= link_to @property.contact.full_name, @property.contact
 
-  = link_to 'EDIT', edit_property_path(@property), class: 'card-link'
-  = link_to 'DELETE', @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+      = link_to 'EDIT', edit_property_path(@property), class: 'card-link'
+      = link_to 'DELETE', @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
-%h2.h6 Deals
-= render layout: 'layouts/card' do
-  .list-group.list-group-flush#deals
-    - @property.deals.each do |deal|
+  .col-md-6
+    = expandable_list(@property.deals, title: 'Deals', id: 'deals', preview: 5) do |deal|
       = link_to deal, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= deal.name

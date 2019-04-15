@@ -11,43 +11,42 @@
     %i.fas.fa-plus.fa-sm.text-white-50
     Add New Property
 
-%h2.h6 Details
-= render layout: 'layouts/card_with_body' do
-  %dl.row
-    %dt.col-md-3 Full name
-    %dd.col-md-9= @contact.full_name
 
-    %dt.col-md-3 Mobile
-    %dd.col-md-9= link_to @contact.mobile, "tel:#{@contact.mobile}"
+.row
+  .col-md-6
+    = card_with_body('Details') do
+      %dl.row
+        %dt.col-md-4 Full name
+        %dd.col-md-8= @contact.full_name
 
-    %dt.col-md-3 Email
-    %dd.col-md-9= link_to @contact.email, "mailto:frank:#{@contact.email}"
+        %dt.col-md-4 Mobile
+        %dd.col-md-8= link_to @contact.mobile, "tel:#{@contact.mobile}"
 
-    %dt.col-md-3 Present address
-    %dd.col-md-9= @contact.present_address
+        %dt.col-md-4 Email
+        %dd.col-md-8= link_to @contact.email, "mailto:frank:#{@contact.email}"
 
-    %dt.col-md-3 Community
-    %dd.col-md-9= @contact.community
+        %dt.col-md-4 Present address
+        %dd.col-md-8= @contact.present_address
 
-    %dt.col-md-3 Length of stay at present address
-    %dd.col-md-9= @contact.length_of_stay_at_present_address
+        %dt.col-md-4 Community
+        %dd.col-md-8= @contact.community
 
-    %dt.col-md-3 Occupation
-    %dd.col-md-9= @contact.occupation
+        %dt.col-md-4 Length of stay at present address
+        %dd.col-md-8= @contact.length_of_stay_at_present_address
 
-    %dt.col-md-3 Date of birth
-    %dd.col-md-9= @contact.date_of_birth.to_formatted_s(:long)
+        %dt.col-md-4 Occupation
+        %dd.col-md-8= @contact.occupation
 
-    %dt.col-md-3 Broker
-    %dd.col-md-9= link_to @contact.broker.full_name, @contact.broker
+        %dt.col-md-4 Date of birth
+        %dd.col-md-8= @contact.date_of_birth.to_formatted_s(:long)
 
-  = link_to 'EDIT', edit_contact_path(@contact), class: 'card-link'
-  = link_to 'DELETE', @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+        %dt.col-md-4 Broker
+        %dd.col-md-8= link_to @contact.broker.full_name, @contact.broker
 
-%h2.h6 Properties
-= render layout: 'layouts/card' do
-  .list-group.list-group-flush#properties
-    - @contact.properties.each do |property|
+      = link_to 'EDIT', edit_contact_path(@contact), class: 'card-link'
+      = link_to 'DELETE', @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+
+    = expandable_list(@contact.properties, title: 'Properties', id: 'properties') do |property|
       = link_to property, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= property.name
@@ -56,10 +55,8 @@
         %p.mb-1= "Location: #{property.location}"
         %small= property.category.titleize
 
-%h2.h6 Deals
-= render layout: 'layouts/card' do
-  .list-group.list-group-flush#deals
-    - @contact.deals.each do |deal|
+  .col-md-6
+    = expandable_list(@contact.deals, title: 'Deals', id: 'deals', preview: 5) do |deal|
       = link_to deal, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= deal.name
