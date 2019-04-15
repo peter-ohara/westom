@@ -1,0 +1,7 @@
+.expandable-list .viewMore[aria-expanded="false"]:before{
+  content:'VIEW ALL';
+}
+
+.expandable-list .viewMore[aria-expanded="true"]:before{
+  content:"VIEW LESS";
+}

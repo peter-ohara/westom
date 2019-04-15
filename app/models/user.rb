@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def deals
+    Deal.closed
+  end
 end

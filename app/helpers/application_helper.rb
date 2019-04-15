@@ -231,8 +231,11 @@ module ApplicationHelper
     )
   end
 
-  def expandable_list(collection, &block)
+  def expandable_list(collection, preview_count=3, &block)
     render partial: 'shared/expandable_list',
-           locals: { collection: collection, block: block, id: "collapse-#{SecureRandom.uuid}" }
+           locals: { collection: collection,
+                     preview_count: preview_count,
+                     block: block,
+                     id: "collapse-#{SecureRandom.uuid}" }
   end
 end

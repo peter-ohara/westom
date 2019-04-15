@@ -6,10 +6,11 @@
   %li.breadcrumb-item.active
     = @user.full_name
 
+
 .row
   .col-md-6
     %h2.h6 Details
-    .card.mb-4
+    .card.mb-4.shadow-sm
       .card-body
         %dl.row
           %dt.col-md-3 First name
@@ -24,7 +25,6 @@
         = link_to 'Edit', edit_user_path(@user), class: 'card-link'
         = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
-  .col-md-6
     %h2.h6 Clients
     = expandable_list(@user.contacts) do |contact|
       = link_to contact, class: 'list-group-item list-group-item-action' do
@@ -34,3 +34,14 @@
         %p.mb-1= contact.mobile
         %p.mb-1= contact.email
         %p.mb-1= "Location: #{contact.present_address}"
+
+  .col-md-6
+    %h2.h6 Deals
+    = expandable_list(@user.deals, 5) do |deal|
+      = link_to deal, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= deal.name
+          %small= deal.stage.titleize
+        %p.mb-1= humanized_money_with_symbol deal.amount
+        %p.mb-1= deal.contact.full_name
+        %small= "Deadline: #{time_ago_in_words deal.deadline}"

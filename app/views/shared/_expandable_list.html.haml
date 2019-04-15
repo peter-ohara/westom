@@ -1,10 +1,11 @@
-.card.mb-4
+.card.mb-4.shadow-sm.expandable-list
   .list-group.list-group-flush
-    - collection.first(3).each do |item|
+    - collection.first(preview_count).each do |item|
       = capture(item, &block)
   .list-group.list-group-flush.collapse{id: id}
-    - collection.first(3).each do |item|
+    - collection.first(preview_count).each do |item|
       = capture(item, &block)
-  .card-footer
-    %a.card-link(data-toggle="collapse" role="button"){ href: "##{id}"}
-      Expand
+  .card-footer.bg-transparent
+    .d-flex.w-100.justify-content-between
+      = "Total: #{collection.count}"
+      %a.card-link.viewMore(data-toggle="collapse" role="button" aria-expanded="false"){ href: "##{id}", aria: {controls: "##{id}"}}
