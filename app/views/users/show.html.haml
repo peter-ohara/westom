@@ -23,6 +23,27 @@
       = link_to 'Edit', edit_user_path(@user), class: 'card-link'
       = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
+    = expandable_list @user.milestones.active, title: 'Milestones', id: 'milestones', preview: 3 do |milestone|
+      = link_to milestone, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= milestone.title
+          %small= milestone.target_type.titleize
+        %p.mb-1
+          %strong Start:
+          = milestone.start_date.to_formatted_s(:long)
+        %p.mb-1
+          %strong End:
+          = milestone.due_date.to_formatted_s(:long)
+        %p.mb-1
+          %strong Target:
+          = format_target milestone
+        .progress.progress-sm.mr-2
+          .progress-bar.bg-info{"aria-valuemax" => milestone.target,
+              "aria-valuemin" => 0,
+              "aria-valuenow" => milestone.progress,
+              role: "progressbar",
+              style: "width: #{milestone_percentage milestone}"}
+
   .col-md-6
     = expandable_list @user.deals, title: 'Deals', id: 'deals', preview: 5 do |deal|
       = link_to deal, class: 'list-group-item list-group-item-action' do
