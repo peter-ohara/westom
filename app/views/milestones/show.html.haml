@@ -41,7 +41,7 @@
         %dd.col-md-10= @milestone.target_type.titleize
 
         %dt.col-md-2 Target
-        %dd.col-md-10= @milestone.target
+        %dd.col-md-10= format_target @milestone
 
         %dt.col-md-2 Status
         %dd.col-md-10= @milestone.status.titleize
