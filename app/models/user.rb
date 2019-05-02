@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :trackable,
          :timeoutable,
          :lockable
-  has_many :contacts, inverse_of: :broker
+
   has_many :deals, inverse_of: :broker
 
   has_many :user_milestones, inverse_of: :user

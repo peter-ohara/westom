@@ -21,7 +21,6 @@
             %th Mobile
             %th Email
             %th Occupation
-            %th Broker
         %tfoot
           %tr
             %th Full name
@@ -30,7 +29,6 @@
             %th Mobile
             %th Email
             %th Occupation
-            %th Broker
         %tbody
           - @contacts.each do |contact|
             %tr
@@ -40,4 +38,3 @@
               %td= contact.mobile
               %td= contact.email
               %td= contact.occupation
-              %td= link_to contact.broker.full_name, contact.broker

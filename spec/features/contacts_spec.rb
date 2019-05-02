@@ -3,10 +3,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Contact Management', js: true do
-  let!(:broker1) { FactoryBot.create(:user) }
-  let!(:broker2) { FactoryBot.create(:user) }
   let!(:contact) { FactoryBot.build(:contact) }
-  let!(:existing_contact) { FactoryBot.create(:contact, broker: broker1) }
+  let!(:existing_contact) { FactoryBot.create(:contact) }
 
   let!(:user) { FactoryBot.create(:user) }
   before :each do
@@ -16,14 +14,14 @@ RSpec.feature 'Contact Management', js: true do
   scenario 'should add a contact (lead or client)' do
     visit contacts_path
     click_link 'Add New Contact'
-    fill_out_contact_information(contact, broker1)
+    fill_out_contact_information(contact)
     click_button 'Create Contact'
     expect(page).to have_content 'Contact was successfully created.'
   end
 
   scenario 'should edit a contact (lead or client)' do
     visit edit_contact_path existing_contact
-    fill_out_contact_information(contact, broker2)
+    fill_out_contact_information(contact)
     click_button 'Update Contact'
     expect(page).to have_content 'Contact was successfully updated.'
   end
@@ -43,7 +41,7 @@ RSpec.feature 'Contact Management', js: true do
     expect_page_to_have_contact_information(page, existing_contact)
   end
 
-  scenario 'should be able to assign myself or another user as ' \
+  xscenario 'should be able to assign myself or another user as ' \
            'the broker for a client' do
     visit edit_contact_path existing_contact
     select broker2.full_name, from: :contact_user_id
@@ -52,7 +50,7 @@ RSpec.feature 'Contact Management', js: true do
     expect(page).to have_content broker2.full_name
   end
 
-  scenario 'should be able to view all clients that have been assigned to ' \
+  xscenario 'should be able to view all clients that have been assigned to ' \
            'another user as their broker' do
     visit user_path broker1
     within :css, '#clients' do
@@ -62,7 +60,7 @@ RSpec.feature 'Contact Management', js: true do
   end
 end
 
-def fill_out_contact_information(contact, user)
+def fill_out_contact_information(contact)
   fill_in :contact_full_name, with: contact.full_name
 
   select contact.date_of_birth.strftime('%Y'), from: 'contact_date_of_birth_1i'
@@ -97,8 +95,6 @@ def fill_out_contact_information(contact, user)
 
   fill_in :contact_client_signature, with: contact.client_signature
 
-  select user.full_name, from: :contact_user_id
-
   fill_in :contact_signature_of_authorized_broker, with: contact.signature_of_authorized_broker
 end
 
@@ -113,5 +109,4 @@ def expect_page_to_have_contact_information(page, existing_contact)
   expect(page).to have_content existing_contact.mobile
   expect(page).to have_content existing_contact.occupation
   expect(page).to have_content existing_contact.email
-  expect(page).to have_content existing_contact.broker.full_name
 end

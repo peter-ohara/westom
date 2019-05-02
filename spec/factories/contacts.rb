@@ -23,6 +23,5 @@ FactoryBot.define do
     request_date { Faker::Date.between(5.years.ago, Date.today) }
     client_signature { Faker::Lorem.word }
     signature_of_authorized_broker { Faker::Lorem.word }
-    broker
   end
 end

@@ -23,15 +23,6 @@
       = link_to 'Edit', edit_user_path(@user), class: 'card-link'
       = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
-    = expandable_list @user.contacts, title: 'Clients', id: 'clients' do |contact|
-      = link_to contact, class: 'list-group-item list-group-item-action' do
-        .d-flex.w-100.justify-content-between
-          %h5.mb-1= contact.full_name
-          %small= contact.community
-        %p.mb-1= contact.mobile
-        %p.mb-1= contact.email
-        %p.mb-1= "Location: #{contact.present_address}"
-
   .col-md-6
     = expandable_list @user.deals, title: 'Deals', id: 'deals', preview: 5 do |deal|
       = link_to deal, class: 'list-group-item list-group-item-action' do

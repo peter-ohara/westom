@@ -40,9 +40,6 @@
         %dt.col-md-4 Date of birth
         %dd.col-md-8= @contact.date_of_birth.to_formatted_s(:long)
 
-        %dt.col-md-4 Broker
-        %dd.col-md-8= link_to @contact.broker.full_name, @contact.broker
-
       = link_to 'EDIT', edit_contact_path(@contact), class: 'card-link'
       = link_to 'DELETE', @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 

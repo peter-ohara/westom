@@ -91,7 +91,6 @@ class ContactsController < ApplicationController
                                     :request_details,
                                     :request_date,
                                     :client_signature,
-                                    :user_id,
                                     :signature_of_authorized_broker,
                                     properties_attributes: %i[_destroy
                                                               id
