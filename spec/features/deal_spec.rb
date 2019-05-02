@@ -132,6 +132,8 @@ def fill_out_deal_information(deal, contact)
 
   fill_in :deal_amount, with: deal.amount
 
+  select user.full_name, from: :deal_user_id
+
   select deal.deadline.strftime('%Y'), from: 'deal_deadline_1i'
   select deal.deadline.strftime('%B'), from: 'deal_deadline_2i'
   select deal.deadline.strftime('%-d'), from: 'deal_deadline_3i'
@@ -155,6 +157,8 @@ def expect_page_to_have_deal_information(page, existing_deal)
   expect(page).to have_content(
     ApplicationController.helpers.humanized_money_with_symbol(existing_deal.amount)
   )
+
+  expect(page).to have_content existing_deal.broker.full_name
 
   expect(page).to have_content existing_deal.deadline.to_formatted_s(:long)
   expect(page).to have_content existing_deal.stage.titleize

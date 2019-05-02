@@ -5,6 +5,7 @@
   = f.input :request_date
   = f.input :request_details
   = f.input :amount
+  = f.association :broker, label_method: :full_name, value_method: :id, prompt: 'Choose a broker'
   = f.input :deadline
   = f.input :stage, collection: Deal.stages.keys.map {|stage| [stage.titleize, stage]}
   = f.input :date_of_closing, start_year: @deal.request_date&.year || Date.today.year, end_year: Date.today.year + 100

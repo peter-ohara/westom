@@ -5,6 +5,10 @@ class Deal < ApplicationRecord
 
   belongs_to :contact, inverse_of: :deals
   belongs_to :property, inverse_of: :deals
+  belongs_to :broker,
+             class_name: 'User',
+             foreign_key: :user_id,
+             inverse_of: :deals
 
   enum type_of_service: { acquisition_of_property: 0,
                           sale_of_property: 1,

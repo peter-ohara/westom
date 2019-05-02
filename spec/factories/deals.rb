@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :deal do
     contact
     property
+    broker
     type_of_service { [0, 1, 2, 3, 4, 5].sample }
     request_date { Faker::Date.between(5.years.ago, Date.today) }
     request_details { Faker::Lorem.paragraph }

@@ -32,6 +32,9 @@
         %dt.col-md-4 Amount
         %dd.col-md-8= humanized_money_with_symbol @deal.amount
 
+        %dt.col-md-4 Broker
+        %dd.col-md-8= link_to @deal.broker.full_name, @deal.broker
+
         %dt.col-md-4 Deadline
         %dd.col-md-8= @deal.deadline.to_formatted_s(:long)
 
