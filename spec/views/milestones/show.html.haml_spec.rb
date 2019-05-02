@@ -7,7 +7,6 @@ RSpec.describe "milestones/show", type: :view do
       :description => "MyText",
       :target_type => 2,
       :target => "9.99",
-      :department => 3,
       :status => 4
     ))
   end

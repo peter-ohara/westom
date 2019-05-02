@@ -33,7 +33,7 @@
         %dt.col-md-2 Due date
         %dd.col-md-10= @milestone.due_date.to_formatted_s(:long)
 
-        - if @milestone.department
+        - if @milestone.description
           %dt.col-md-2 Description
           %dd.col-md-10= @milestone.description
 
@@ -42,10 +42,6 @@
 
         %dt.col-md-2 Target
         %dd.col-md-10= @milestone.target
-
-        - if @milestone.department
-          %dt.col-md-2 Department
-          %dd.col-md-10= @milestone.department.titleize
 
         %dt.col-md-2 Status
         %dd.col-md-10= @milestone.status.titleize

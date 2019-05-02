@@ -12,7 +12,6 @@ FactoryBot.define do
         rand(5...20)
       end
     end
-    department { [0, 1, 2].sample }
     status { [0, 1].sample }
   end
 end

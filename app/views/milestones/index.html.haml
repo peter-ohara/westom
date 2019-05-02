@@ -26,7 +26,6 @@
             %th Due date
             %th Target type
             %th Target
-            %th Department
             %th Users
             %th Status
         %tfoot
@@ -36,7 +35,6 @@
             %th Due date
             %th Target type
             %th Target
-            %th Department
             %th Users
             %th Status
         %tbody
@@ -50,8 +48,6 @@
               %td{ data: {sort: milestone.target_type_before_type_cast } }
                 = milestone.target_type.titleize
               %td= format_target milestone
-              %td{ data: {sort: milestone.department_before_type_cast } }
-                = milestone.department&.titleize
               %td
                 != milestone.users.map {|user| link_to user.full_name, user}.join(', ')
               %td.status{ data: {sort: milestone.status_before_type_cast } }

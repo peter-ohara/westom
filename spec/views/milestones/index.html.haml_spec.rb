@@ -8,7 +8,6 @@ RSpec.describe "milestones/index", type: :view do
         :description => "MyText",
         :target_type => 2,
         :target => "9.99",
-        :department => 3,
         :status => 4
       ),
       Milestone.create!(
@@ -16,7 +15,6 @@ RSpec.describe "milestones/index", type: :view do
         :description => "MyText",
         :target_type => 2,
         :target => "9.99",
-        :department => 3,
         :status => 4
       )
     ])

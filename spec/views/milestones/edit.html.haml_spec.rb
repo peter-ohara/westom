@@ -7,7 +7,6 @@ RSpec.describe "milestones/edit", type: :view do
       :description => "MyText",
       :target_type => 1,
       :target => "9.99",
-      :department => 1,
       :status => 1
     ))
   end
@@ -24,8 +23,6 @@ RSpec.describe "milestones/edit", type: :view do
       assert_select "input[name=?]", "milestone[target_type]"
 
       assert_select "input[name=?]", "milestone[target]"
-
-      assert_select "input[name=?]", "milestone[department]"
 
       assert_select "input[name=?]", "milestone[status]"
     end
