@@ -40,7 +40,14 @@
         %tbody
           - @milestones.each do |milestone|
             %tr
-              %td= link_to milestone.title, milestone
+              %td
+                = link_to milestone.title, milestone
+                .progress.progress-sm.mr-2
+                  .progress-bar.bg-info{"aria-valuemax" => milestone.target,
+                  "aria-valuemin" => 0,
+                  "aria-valuenow" => milestone.progress,
+                  role: "progressbar",
+                  style: "width: #{milestone_percentage milestone}"}
               %td{ data: {sort: milestone.start_date.strftime("%Y%m%d%H%M%s") } }
                 = milestone.start_date.to_formatted_s(:long)
               %td{ data: {sort: milestone.due_date.strftime("%Y%m%d%H%M%s") } }
