@@ -1,7 +1,14 @@
-%h1 Editing milestone
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item
+    = link_to 'Milestones', milestones_path
+  %li.breadcrumb-item
+    = link_to @milestone.title, @milestone
+  %li.breadcrumb-item.active
+    Edit
 
-= render 'form'
-
-= link_to 'Show', @milestone
-\|
-= link_to 'Back', milestones_path
+.row
+  .col-md-6.mx-auto
+    = card_with_body('Details') do
+      = render partial: 'form'

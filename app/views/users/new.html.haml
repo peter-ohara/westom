@@ -6,4 +6,7 @@
   %li.breadcrumb-item.active
     New
 
-= render partial: 'form', layout: 'layouts/card_with_body'
+.row
+  .col-md-6.mx-auto
+    = card_with_body('Details') do
+      = render partial: 'form'

@@ -4,6 +4,9 @@
   %li.breadcrumb-item
     = link_to 'Milestones', milestones_path
   %li.breadcrumb-item.active
-    New
+    Add Milestone
 
-= render partial: 'form', layout: 'layouts/card_with_body'
+.row
+  .col-md-6.mx-auto
+    = card_with_body('Details') do
+      = render partial: 'form'
