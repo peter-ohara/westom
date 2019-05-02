@@ -17,7 +17,10 @@ class Milestone < ApplicationRecord
   scope :status, ->(status) { where status: status }
 
   def deals
-    Deal.closed.where('date_of_closing > ? AND date_of_closing < ?', start_date, due_date)
+    Deal.joins("INNER JOIN users ON users.id = deals.user_id")
+        .where('date_of_closing > ? AND date_of_closing < ?',
+               start_date,
+               due_date)
   end
 
   def progress
