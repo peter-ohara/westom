@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: cc9f09e287fea252339c485046fe99a9ff41df07
+  revision: 14617c4ef7b89998e98e833ad5d11760e03d9bad
   branch: master
   specs:
     faker (1.9.3)
@@ -59,7 +59,7 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (8.0.0)
-    autoprefixer-rails (9.5.1)
+    autoprefixer-rails (9.5.1.1)
       execjs
     bcrypt (3.1.12)
     bindex (0.7.0)
@@ -113,12 +113,12 @@ GEM
     factory_bot_rails (5.0.2)
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
-    ffi (1.10.0)
+    ffi (1.11.1)
     font-awesome-sass (5.8.1)
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (5.0.4)
+    haml (5.1.1)
       temple (>= 0.8.0)
       tilt
     haml-rails (1.0.0)
@@ -135,9 +135,8 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
-    jbuilder (2.8.0)
+    jbuilder (2.9.1)
       activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     jquery-datatables (1.10.19.1)
     jquery-easing-rails (0.0.2)
       railties (>= 3.1.0)
@@ -169,7 +168,6 @@ GEM
       monetize (~> 1.9.0)
       money (~> 6.13.2)
       railties (>= 3.0)
-    multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
@@ -184,7 +182,7 @@ GEM
       method_source (~> 0.9.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    public_suffix (3.0.3)
+    public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -239,7 +237,7 @@ GEM
     ruby_dep (1.5.0)
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
-    rubyzip (1.2.2)
+    rubyzip (1.2.3)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -260,7 +258,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (3.142.0)
+    selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     sexp_processor (4.12.0)
@@ -305,7 +303,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.5.0)
+    unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
     warden (1.2.8)
       rack (>= 2.0.6)
