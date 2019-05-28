@@ -49,3 +49,12 @@
 
       = link_to 'EDIT', edit_deal_path(@deal), class: 'card-link'
       = link_to 'DELETE', @deal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
+
+  .col-md-6
+    = expandable_list @deal.activities, title: 'Activities', id: 'activities', preview: 5 do |activity|
+      = link_to activity, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= activity.title
+          %small= "Due in #{time_ago_in_words activity.due_date}"
+        %p.mb-1= activity.description
+        %small= activity.broker.full_name

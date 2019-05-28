@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190502191830) do
+ActiveRecord::Schema.define(version: 20190528174332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "deal_id"
+    t.string "title"
+    t.text "description"
+    t.datetime "due_date"
+    t.datetime "completion_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deal_id"], name: "index_activities_on_deal_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "full_name"
@@ -120,6 +133,8 @@ ActiveRecord::Schema.define(version: 20190502191830) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "activities", "deals"
+  add_foreign_key "activities", "users"
   add_foreign_key "deals", "contacts"
   add_foreign_key "deals", "properties"
   add_foreign_key "deals", "users"

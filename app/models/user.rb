@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :user_milestones, inverse_of: :user
   has_many :milestones, through: :user_milestones
 
+  has_many :activities, inverse_of: :broker
+
   def full_name
     "#{first_name} #{last_name}"
   end

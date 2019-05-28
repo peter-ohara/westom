@@ -11,9 +11,9 @@ brokers = []
 clients = []
 8.times { brokers.push FactoryBot.create :user }
 
-brokers.each do |broker|
+brokers.each do |_broker|
   rand(10...20).times do
-    clients.push FactoryBot.create :contact, broker: broker
+    clients.push FactoryBot.create :contact
   end
 end
 
@@ -21,7 +21,11 @@ clients.each do |client|
   rand(1...3).times do
     property = FactoryBot.create :property, contact: client
     rand(0..2).times do
-      FactoryBot.create :deal, property: property, contact: clients.sample
+      deal = FactoryBot.create :deal, property: property, contact: clients.sample
+
+      3.times do
+        FactoryBot.create :activity, deal: deal, broker: deal.broker
+      end
     end
   end
 end
@@ -52,9 +56,13 @@ FactoryBot.create(:milestone,
                   users: brokers[0..3])
 
 brokers[0..3].map do |broker|
-  FactoryBot.create :deal,
-                    broker: broker,
-                    stage: :closed,
-                    date_of_closing: Faker::Date.between(start_of_year,
-                                                         middle_of_year)
+  deal = FactoryBot.create :deal,
+                           broker: broker,
+                           stage: :closed,
+                           date_of_closing: Faker::Date.between(start_of_year,
+                                                                middle_of_year)
+
+  3.times do
+    FactoryBot.create :activity, deal: deal, broker: broker
+  end
 end

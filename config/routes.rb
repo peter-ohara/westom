@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :activities
   resources :milestones
   devise_for :users
   resources :contacts do

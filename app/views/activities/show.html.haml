@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @activity.broker.full_name
+%p
+  %b Deal:
+  = @activity.deal
+%p
+  %b Title:
+  = @activity.title
+%p
+  %b Description:
+  = @activity.description
+%p
+  %b Due date:
+  = @activity.due_date
+%p
+  %b Completion date:
+  = @activity.completion_date
+
+= link_to 'Edit', edit_activity_path(@activity)
+\|
+= link_to 'Back', activities_path

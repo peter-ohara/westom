@@ -10,6 +10,8 @@ class Deal < ApplicationRecord
              foreign_key: :user_id,
              inverse_of: :deals
 
+  has_many :activities, inverse_of: :deal
+
   enum type_of_service: { acquisition_of_property: 0,
                           sale_of_property: 1,
                           rental_of_property: 2,
