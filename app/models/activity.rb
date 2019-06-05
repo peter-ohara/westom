@@ -5,4 +5,8 @@ class Activity < ApplicationRecord
              inverse_of: :activities
 
   belongs_to :deal, inverse_of: :activities
+
+  def activity_type
+    [:call, :email, :task].sample.to_s
+  end
 end

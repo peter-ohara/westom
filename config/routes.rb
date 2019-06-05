@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
-  resources :activities
-  resources :milestones
   devise_for :users
-  resources :contacts do
-    resources :properties, shallow: true
-  end
 
-  resources :properties, only: [:index] do
-    resources :deals, shallow: true
-  end
-
-  resources :deals, only: [:index]
   resources :users
+  resources :milestones
+  resources :contacts
+  resources :properties
+  resources :deals do
+    resources :activities
+  end
+
   root 'welcome#index'
+  get 'dashboard', to: 'welcome#dashboard', as: :dashboard
 end

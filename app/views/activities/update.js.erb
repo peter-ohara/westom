@@ -1,0 +1,2 @@
+$('#edit_activity_<%= @activity.id %>').modal('hide');
+$('#activity_<%= @activity.id %>').replaceWith("<%= escape_javascript(render @activity) %>");

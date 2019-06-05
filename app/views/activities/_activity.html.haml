@@ -1,0 +1,22 @@
+.card.mb-3.shadow-sm{id: "activity_#{activity.id}"}
+  .list-group.list-group-flush
+    %a.list-group-item.list-group-item-action{"data-target" => "#edit_activity_#{activity.id}", "data-toggle" => "modal"}
+      .d-flex.w-100.justify-content-between
+        .mb-1= activity.title
+        %small= activity.created_at.to_formatted_s(:long)
+      %p.mb-1= simple_format activity.description
+      %small
+        Assigned to
+        = activity.broker.full_name
+
+        Due date
+        = activity.due_date&.to_formatted_s(:long)
+
+/ Modal
+.modal.fade{id: "edit_activity_#{activity.id}", "aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      .modal-body
+        %button.close.mb-2{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} ×
+        = render 'activities/form', activity: activity
