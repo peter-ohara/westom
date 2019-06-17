@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#index'
-  get 'dashboard', to: 'welcome#dashboard', as: :dashboard
+  get 'overview', to: 'welcome#overview', as: :overview
 end

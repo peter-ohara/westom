@@ -1,16 +1,20 @@
 %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
   / Sidebar - Brand
-  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{href: "index.html"}
+  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{href: root_path }
     .sidebar-brand-icon.rotate-n-15
       %i.fas.fa-laugh-wink
     .sidebar-brand-text.mx-3 Westom
   / Divider
   %hr.sidebar-divider.my-0/
-  / Nav Item - Dashboard
+  / Nav Item - Overview
   %li.nav-item.active
-    %a.nav-link{href: root_path}
+    %a.nav-link{href: current_user}
+      %i.fas.fa-fw.fa-home
+      %span Home
+  %li.nav-item.active
+    %a.nav-link{href: overview_path}
       %i.fas.fa-fw.fa-tachometer-alt
-      %span Dashboard
+      %span Overview
   / Divider
   %hr.sidebar-divider/
   / Heading
@@ -21,6 +25,11 @@
     %a.nav-link{href: users_path}
       %i.fas.fa-fw.fa-user
       %span Users
+  / Nav Item - Milestones
+  %li.nav-item
+    %a.nav-link{href: milestones_path}
+      %i.fas.fa-fw.fa-trophy
+      %span Milestones
   / Nav Item - Contacts
   %li.nav-item
     %a.nav-link{href: contacts_path}
@@ -29,18 +38,13 @@
   / Nav Item - Properties
   %li.nav-item
     %a.nav-link{href: properties_path}
-      %i.fas.fa-fw.fa-home
+      %i.fas.fa-fw.fa-building
       %span Properties
   / Nav Item - Deals
   %li.nav-item
     %a.nav-link{href: deals_path}
       %i.fas.fa-fw.fa-handshake
       %span Deals
-  / Nav Item - Milestones
-  %li.nav-item
-    %a.nav-link{href: milestones_path}
-      %i.fas.fa-fw.fa-trophy
-      %span Milestones
   / Divider
   %hr.sidebar-divider.d-none.d-md-block/
   / Sidebar Toggler (Sidebar)

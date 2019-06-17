@@ -2,89 +2,68 @@
   %li.breadcrumb-item.active
     Home
 
-.row
-  / Earnings (Monthly) Card Example
-  .col-xl-3.col-md-6.mb-4
-    .card.border-left-primary.shadow-sm.h-100.py-2
-      .card-body
-        .row.no-gutters.align-items-center
-          .col.mr-2
-            .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 Earnings (#{Date.today.strftime("%Y")})
-            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 1000).to_money.format
-          .col-auto
-            %i.fas.fa-calendar.fa-2x.text-gray-300
-  / Earnings (Monthly) Card Example
-  .col-xl-3.col-md-6.mb-4
-    .card.border-left-success.shadow-sm.h-100.py-2
-      .card-body
-        .row.no-gutters.align-items-center
-          .col.mr-2
-            .text-xs.font-weight-bold.text-success.text-uppercase.mb-1 Revenue (#{Date.today.strftime("%Y")})
-            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 100).to_money.format
-          .col-auto
-            %i.fas.fa-dollar-sign.fa-2x.text-gray-300
-  / Deals Closed Card Example
-  .col-xl-3.col-md-6.mb-4
-    .card.border-left-info.shadow-sm.h-100.py-2
-      .card-body
-        .row.no-gutters.align-items-center
-          .col.mr-2
-            .text-xs.font-weight-bold.text-info.text-uppercase.mb-1 Deals closed
-            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where(stage: :closed).count
-          .col-auto
-            %i.fas.fa-trophy.fa-2x.text-gray-300
-  / Deals Pending Card Example
-  .col-xl-3.col-md-6.mb-4
-    .card.border-left-warning.shadow-sm.h-100.py-2
-      .card-body
-        .row.no-gutters.align-items-center
-          .col.mr-2
-            .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1 Deals Pending
-            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where.not(stage: :closed).count
-          .col-auto
-            %i.fas.fa-circle-notch.fa-2x.text-gray-300
-/ Content Row
-.row
-  / Area Chart
-  .col-xl-6.col-lg-12
-    %h2.h6 Deals funnel
-    .card.shadow-sm.mb-4
-      / Card Body
-      .card-body
-        .chart-area
-          = deal_funnel 'myAreaChart'
 
-  / Pie Chart
-  .col-xl-3.col-lg-6
-    %h2.h6 Deals by Category
-    .card.shadow-sm.mb-4
-      / Card Body
-      .card-body
-        .chart-pie.pt-4.pb-2
-          = deal_break_down_by_category 'myPieChart'
-        .mt-4.text-center.small
-          %span.mr-2
-            %i.fas.fa-circle.text-primary
-            Residential
-          %span.mr-2
-            %i.fas.fa-circle.text-success
-            Commercial
+= content_for :actions do
+  = link_to new_user_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New User
+  = link_to new_milestone_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2' do
+    %i.fas.fa-plus.fa-sm.text-white-50
+    Add New Milestone
+  = link_to new_contact_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2' do
+    %i.fas.fa-plus.fa-sm.text-white-50
+    Add New Contact
+  = link_to new_property_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2' do
+    %i.fas.fa-plus.fa-sm.text-white-50
+    Add New Property
+  = link_to new_deal_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-plus.fa-sm.text-white-50
+    Add New Deal
 
-  / Pie Chart
-  .col-xl-3.col-lg-6
-    %h2.h6 Deals by Property Type
-    .card.shadow-sm.mb-4
-      / Card Body
-      .card-body
-        .chart-pie.pt-4.pb-2
-          = deal_break_down_by_property_type 'myPieChart2'
-        .mt-4.text-center.small
-          %span.mr-2
-            %i.fas.fa-circle.text-primary
-            Land
-          %span.mr-2
-            %i.fas.fa-circle.text-success
-            House
-          %span.mr-2
-            %i.fas.fa-circle.text-info
-            Apartment
+.row
+  .col-md-6
+    = expandable_list @user.milestones.active, title: 'Milestones', id: 'milestones', preview: 3 do |milestone|
+      = link_to milestone, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= milestone.title
+          %small= milestone.target_type.titleize
+        %p.mb-1
+          %strong Start:
+          = milestone.start_date.to_formatted_s(:long)
+        %p.mb-1
+          %strong End:
+          = milestone.due_date.to_formatted_s(:long)
+        %p.mb-1
+          %strong Target:
+          = format_target milestone
+        .progress.progress-sm.mr-2
+          .progress-bar.bg-info{"aria-valuemax" => milestone.target,
+              "aria-valuemin" => 0,
+              "aria-valuenow" => milestone.progress,
+              role: "progressbar",
+              style: "width: #{milestone_percentage milestone}"}
+
+    = expandable_list @user.contacts, title: 'Contacts', id: 'contacts', preview: 3 do |contact|
+      = link_to contact, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= contact.full_name
+        %p.mb-1= contact.mobile
+
+    = expandable_list @user.properties, title: 'Properties', id: 'properties', preview: 3 do |property|
+      = link_to property, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= property.name
+          %small= property.property_type.titleize
+        %p.mb-1= property.description
+        %p.mb-1= property.location
+        %small= property.category.titleize
+
+  .col-md-6
+    = expandable_list @user.deals, title: 'Deals', id: 'deals', preview: 5 do |deal|
+      = link_to deal, class: 'list-group-item list-group-item-action' do
+        .d-flex.w-100.justify-content-between
+          %h5.mb-1= deal.name
+          %small= deal.stage.titleize
+        %p.mb-1= humanized_money_with_symbol deal.amount
+        %p.mb-1= deal.contact.full_name
+        %small= "Deadline: #{time_ago_in_words deal.deadline}"

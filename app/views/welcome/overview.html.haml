@@ -1,0 +1,92 @@
+= content_for :breadcrumb do
+  %li.breadcrumb-item
+    = link_to 'Home', root_path
+  %li.breadcrumb-item.active
+    Overview
+
+.row
+  / Earnings (Monthly) Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-primary.shadow-sm.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-primary.text-uppercase.mb-1 Earnings (#{Date.today.strftime("%Y")})
+            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 1000).to_money.format
+          .col-auto
+            %i.fas.fa-calendar.fa-2x.text-gray-300
+  / Earnings (Monthly) Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-success.shadow-sm.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-success.text-uppercase.mb-1 Revenue (#{Date.today.strftime("%Y")})
+            .h5.mb-0.font-weight-bold.text-gray-800= (Deal.closed.last_year.sum('amount_cents') / 100).to_money.format
+          .col-auto
+            %i.fas.fa-dollar-sign.fa-2x.text-gray-300
+  / Deals Closed Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-info.shadow-sm.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-info.text-uppercase.mb-1 Deals closed
+            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where(stage: :closed).count
+          .col-auto
+            %i.fas.fa-trophy.fa-2x.text-gray-300
+  / Deals Pending Card Example
+  .col-xl-3.col-md-6.mb-4
+    .card.border-left-warning.shadow-sm.h-100.py-2
+      .card-body
+        .row.no-gutters.align-items-center
+          .col.mr-2
+            .text-xs.font-weight-bold.text-warning.text-uppercase.mb-1 Deals Pending
+            .h5.mb-0.font-weight-bold.text-gray-800= Deal.last_year.where.not(stage: :closed).count
+          .col-auto
+            %i.fas.fa-circle-notch.fa-2x.text-gray-300
+/ Content Row
+.row
+  / Area Chart
+  .col-xl-6.col-lg-12
+    %h2.h6 Deals funnel
+    .card.shadow-sm.mb-4
+      / Card Body
+      .card-body
+        .chart-area
+          = deal_funnel 'myAreaChart'
+
+  / Pie Chart
+  .col-xl-3.col-lg-6
+    %h2.h6 Deals by Category
+    .card.shadow-sm.mb-4
+      / Card Body
+      .card-body
+        .chart-pie.pt-4.pb-2
+          = deal_break_down_by_category 'myPieChart'
+        .mt-4.text-center.small
+          %span.mr-2
+            %i.fas.fa-circle.text-primary
+            Residential
+          %span.mr-2
+            %i.fas.fa-circle.text-success
+            Commercial
+
+  / Pie Chart
+  .col-xl-3.col-lg-6
+    %h2.h6 Deals by Property Type
+    .card.shadow-sm.mb-4
+      / Card Body
+      .card-body
+        .chart-pie.pt-4.pb-2
+          = deal_break_down_by_property_type 'myPieChart2'
+        .mt-4.text-center.small
+          %span.mr-2
+            %i.fas.fa-circle.text-primary
+            Land
+          %span.mr-2
+            %i.fas.fa-circle.text-success
+            House
+          %span.mr-2
+            %i.fas.fa-circle.text-info
+            Apartment
