@@ -27,6 +27,7 @@
             %th Category
             %th Property type
             %th Listing type
+            %th Price
             %th Owner/Agent
         %tfoot
           %tr
@@ -36,6 +37,7 @@
             %th Category
             %th Property type
             %th Listing type
+            %th Price
             %th Owner/Agent
         %tbody
           - @properties.each do |property|
@@ -49,4 +51,5 @@
                 = property.property_type.titleize
               %td.listing_type{ data: {sort: property.listing_type_before_type_cast } }
                 = property.listing_type.titleize
+              %td= humanized_money_with_symbol property.price
               %td= link_to property.owner.full_name, property.owner

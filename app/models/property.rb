@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 class Property < ApplicationRecord
   include Filterable
+
+  monetize :price_cents
 
   belongs_to :owner,
              class_name: 'Contact',

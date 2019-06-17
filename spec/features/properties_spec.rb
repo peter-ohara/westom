@@ -88,6 +88,7 @@ def fill_out_property_information(property)
 
   fill_in :property_description, with: property.description
   fill_in :property_location, with: property.location
+  fill_in :property_price, with: property.price
 
   select property.category.titleize, from: 'property_category'
   select property.property_type.titleize, from: 'property_property_type'
@@ -101,6 +102,10 @@ def expect_page_to_have_property_information(page, existing_property)
   expect(page).to have_content existing_property.category.titleize
   expect(page).to have_content existing_property.property_type.titleize
   expect(page).to have_content existing_property.listing_type.titleize
+  expect(page).to have_content(
+    ApplicationController.helpers
+        .humanized_money_with_symbol(existing_property.price)
+  )
   expect(page).to have_content existing_property.owner.full_name
 end
 

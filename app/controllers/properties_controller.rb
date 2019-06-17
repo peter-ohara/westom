@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[show edit update destroy]
 
@@ -68,6 +70,12 @@ class PropertiesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    params.require(:property).permit(:name, :description, :location, :category, :property_type, :contact_id)
+    params.require(:property).permit(:name,
+                                     :description,
+                                     :location,
+                                     :category,
+                                     :property_type,
+                                     :price,
+                                     :contact_id)
   end
 end

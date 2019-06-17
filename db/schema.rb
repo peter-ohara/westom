@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190528174332) do
+ActiveRecord::Schema.define(version: 20190617203307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 20190528174332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "listing_type", default: 0, null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["contact_id"], name: "index_properties_on_contact_id"
   end
 

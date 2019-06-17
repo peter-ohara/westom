@@ -33,6 +33,9 @@
         %dt.col-md-3 Listing Type
         %dd.col-md-9= @property.listing_type.titleize
 
+        %dt.col-md-3 Price
+        %dd.col-md-9= humanized_money_with_symbol @property.price
+
         %dt.col-md-3 Owner
         %dd.col-md-9= link_to @property.owner.full_name, @property.owner
 

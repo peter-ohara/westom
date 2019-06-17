@@ -11,4 +11,5 @@
   = f.input :category, collection: Property.categories.keys.map {|category| [category.titleize, category]}
   = f.input :property_type, collection: Property.property_types.keys.map {|p_type| [p_type.titleize, p_type]}
   = f.input :listing_type, collection: Property.listing_types.keys.map {|p_type| [p_type.titleize, p_type]}
+  = f.input :price, label: 'Price (US$)'
   = f.submit class: 'btn btn-primary'
