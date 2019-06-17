@@ -7,6 +7,10 @@ RSpec.feature 'Contact Management', js: true do
   let!(:existing_contact) { FactoryBot.create(:contact) }
 
   let!(:user) { FactoryBot.create(:user) }
+  let!(:deal) do
+    FactoryBot.create(:deal, contact: existing_contact, broker: user)
+  end
+
   before :each do
     login_as user
   end
@@ -26,7 +30,17 @@ RSpec.feature 'Contact Management', js: true do
     expect(page).to have_content 'Contact was successfully updated.'
   end
 
+  fscenario 'should be able to assign myself or another user as ' \
+           'the broker for a deal' do
+    visit edit_deal_path deal
+    select user.full_name, from: :deal_user_id
+    click_button 'Update Deal'
+    expect(page).to have_content 'Deal was successfully updated.'
+    expect(page).to have_content contact.full_name
+  end
+
   scenario 'should delete a contact (lead or client)' do
+    skip 'Need to implement soft deletes then dependent destroy or some other strategy'
     visit contact_path existing_contact
 
     page.accept_confirm do
@@ -41,19 +55,10 @@ RSpec.feature 'Contact Management', js: true do
     expect_page_to_have_contact_information(page, existing_contact)
   end
 
-  xscenario 'should be able to assign myself or another user as ' \
-           'the broker for a client' do
-    visit edit_contact_path existing_contact
-    select broker2.full_name, from: :contact_user_id
-    click_button 'Update Contact'
-    expect(page).to have_content 'Contact was successfully updated.'
-    expect(page).to have_content broker2.full_name
-  end
-
-  xscenario 'should be able to view all clients that have been assigned to ' \
+  scenario 'should be able to view all clients that have been assigned to ' \
            'another user as their broker' do
-    visit user_path broker1
-    within :css, '#clients' do
+    visit user_path user
+    within :css, '#contacts' do
       expect(page).to have_content existing_contact.full_name
       expect(page).to have_link, href: contact_path(existing_contact)
     end
@@ -61,52 +66,27 @@ RSpec.feature 'Contact Management', js: true do
 end
 
 def fill_out_contact_information(contact)
-  fill_in :contact_full_name, with: contact.full_name
+  fill_in :contact_first_name, with: contact.first_name
+  fill_in :contact_last_name, with: contact.last_name
+  fill_in :contact_mobile, with: contact.mobile
+  fill_in :contact_email, with: contact.email
 
   select contact.date_of_birth.strftime('%Y'), from: 'contact_date_of_birth_1i'
   select contact.date_of_birth.strftime('%B'), from: 'contact_date_of_birth_2i'
   select contact.date_of_birth.strftime('%-d'), from: 'contact_date_of_birth_3i'
 
   fill_in :contact_present_address, with: contact.present_address
-  fill_in :contact_community, with: contact.community
-  fill_in :contact_length_of_stay_at_present_address, with: contact.length_of_stay_at_present_address
-  fill_in :contact_mobile, with: contact.mobile
-  fill_in :contact_occupation, with: contact.occupation
-  fill_in :contact_email, with: contact.email
-
-  check :contact_personal_property
-  check :contact_jointly_owned_property
-  check :contact_agent
-  check :contact_has_authority_from_owner
-  check :contact_has_site_plan
-  check :contact_site_plan_request
-  check :contact_search_report
-  check :contact_search_report_request
-  check :contact_valuation_report
-  check :contact_valuation_report_request
-
-  select contact.type_of_service.titleize, from: :contact_type_of_service
-
-  fill_in :contact_request_details, with: contact.request_details
-
-  select contact.request_date.strftime('%Y'), from: 'contact_request_date_1i'
-  select contact.request_date.strftime('%B'), from: 'contact_request_date_2i'
-  select contact.request_date.strftime('%-d'), from: 'contact_request_date_3i'
-
-  fill_in :contact_client_signature, with: contact.client_signature
-
-  fill_in :contact_signature_of_authorized_broker, with: contact.signature_of_authorized_broker
+  fill_in :contact_notes, with: contact.notes
 end
 
 def expect_page_to_have_contact_information(page, existing_contact)
-  expect(page).to have_content existing_contact.full_name
+  expect(page).to have_content existing_contact.first_name
+  expect(page).to have_content existing_contact.last_name
+  expect(page).to have_content existing_contact.mobile
+  expect(page).to have_content existing_contact.email
   expect(page).to have_content existing_contact.date_of_birth.strftime('%Y')
   expect(page).to have_content existing_contact.date_of_birth.strftime('%B')
   expect(page).to have_content existing_contact.date_of_birth.strftime('%-d')
   expect(page).to have_content existing_contact.present_address
-  expect(page).to have_content existing_contact.community
-  expect(page).to have_content existing_contact.length_of_stay_at_present_address
-  expect(page).to have_content existing_contact.mobile
-  expect(page).to have_content existing_contact.occupation
-  expect(page).to have_content existing_contact.email
+  expect(page).to have_content existing_contact.notes
 end
