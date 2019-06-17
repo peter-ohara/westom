@@ -5,7 +5,6 @@
                   value_method: :id,
                   input_html: { data: { 'searchable': true } },
                   hint: link_to('Add a new Owner', new_contact_path, class: 'form-text')
-  = f.input :name
   = f.input :description
   = f.input :location
   = f.input :category, collection: Property.categories.keys.map {|category| [category.titleize, category]}

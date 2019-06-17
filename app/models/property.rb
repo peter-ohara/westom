@@ -19,6 +19,10 @@ class Property < ApplicationRecord
 
   scope :listing_type, ->(listing_type) { where listing_type: listing_type }
 
+  def name
+    "#{id} for #{owner.full_name}"
+  end
+
   def full_name
     "#{name} at #{location}"
   end

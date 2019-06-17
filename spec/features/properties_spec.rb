@@ -50,7 +50,7 @@ RSpec.feature 'Property Management', js: true do
            'a contact' do
     visit contact_path contact1
     within :css, '#properties' do
-      expect(page).to have_content existing_property.name
+      expect(page).to have_content existing_property.id
       expect(page).to have_link href: property_path(existing_property)
     end
   end
@@ -84,8 +84,6 @@ end
 def fill_out_property_information(property)
   select property.owner.fully_identifying_information, from: :property_contact_id
 
-  fill_in :property_name, with: property.name
-
   fill_in :property_description, with: property.description
   fill_in :property_location, with: property.location
   fill_in :property_price, with: property.price
@@ -96,7 +94,6 @@ def fill_out_property_information(property)
 end
 
 def expect_page_to_have_property_information(page, existing_property)
-  expect(page).to have_content existing_property.name
   expect(page).to have_content existing_property.description
   expect(page).to have_content existing_property.location
   expect(page).to have_content existing_property.category.titleize

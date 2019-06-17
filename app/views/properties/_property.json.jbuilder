@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 json.extract! property, :id,
-              :name,
               :description,
               :location,
               :category,

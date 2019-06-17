@@ -47,7 +47,7 @@
     = expandable_list(@contact.properties, title: 'Properties', id: 'properties') do |property|
       = link_to property, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
-          %h5.mb-1= property.name
+          %h5.mb-1= property.id
           %small= property.property_type.titleize
         %p.mb-1= property.description
         %p.mb-1= "Location: #{property.location}"
