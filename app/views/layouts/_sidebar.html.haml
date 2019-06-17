@@ -6,42 +6,43 @@
     .sidebar-brand-text.mx-3 Westom
   / Divider
   %hr.sidebar-divider.my-0/
-  / Nav Item - Overview
-  %li.nav-item.active
-    %a.nav-link{href: current_user}
+  / Nav Item - Home
+  %li.nav-item{class: ('active' if current_page? user_path(current_user))}
+    %a.nav-link{href: user_path(current_user)}
       %i.fas.fa-fw.fa-home
       %span Home
-  %li.nav-item.active
-    %a.nav-link{href: overview_path}
-      %i.fas.fa-fw.fa-tachometer-alt
-      %span Overview
   / Divider
   %hr.sidebar-divider/
   / Heading
   .sidebar-heading
     Interface
+  / Nav Item - Overview
+  %li.nav-item{class: ('active' if current_page? overview_path)}
+    %a.nav-link{href: overview_path}
+      %i.fas.fa-fw.fa-tachometer-alt
+      %span Overview
   / Nav Item - Users
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? users_path)}
     %a.nav-link{href: users_path}
       %i.fas.fa-fw.fa-user
       %span Users
   / Nav Item - Milestones
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? milestones_path)}
     %a.nav-link{href: milestones_path}
       %i.fas.fa-fw.fa-trophy
       %span Milestones
   / Nav Item - Contacts
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? contacts_path)}
     %a.nav-link{href: contacts_path}
       %i.fas.fa-fw.fa-users
       %span Contacts
   / Nav Item - Properties
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? properties_path)}
     %a.nav-link{href: properties_path}
       %i.fas.fa-fw.fa-building
       %span Properties
   / Nav Item - Deals
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? deals_path)}
     %a.nav-link{href: deals_path}
       %i.fas.fa-fw.fa-handshake
       %span Deals
