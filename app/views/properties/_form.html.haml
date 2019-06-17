@@ -1,6 +1,10 @@
 = simple_form_for [@contact, @property] do |f|
   = f.error_notification
-  = f.association :owner, label_method: :fully_identifying_information, value_method: :id
+  = f.association :owner,
+                  label_method: :fully_identifying_information,
+                  value_method: :id,
+                  input_html: { data: { 'searchable': true } },
+                  hint: link_to('Add a new Owner', new_contact_path, class: 'form-text')
   = f.input :name
   = f.input :description
   = f.input :location
