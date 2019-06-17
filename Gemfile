@@ -55,6 +55,11 @@ gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 gem 'active_link_to'
 gem 'devise'
 
+# WYSIWYG Editor
+gem 'trix'
+
+gem 'select2-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
