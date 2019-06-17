@@ -7,6 +7,11 @@
     = @contact.fully_identifying_information
 
 = content_for :actions do
+  = link_to new_property_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2' do
+    %i.fas.fa-plus.fa-sm.text-white-50
+    Add Property
+
+= content_for :actions do
   = link_to new_deal_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
     %i.fas.fa-plus.fa-sm.text-white-50
     Add New Deal
