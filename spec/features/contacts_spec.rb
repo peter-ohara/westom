@@ -30,7 +30,7 @@ RSpec.feature 'Contact Management', js: true do
     expect(page).to have_content 'Contact was successfully updated.'
   end
 
-  fscenario 'should be able to assign myself or another user as ' \
+  scenario 'should be able to assign myself or another user as ' \
            'the broker for a deal' do
     visit edit_deal_path deal
     select user.full_name, from: :deal_user_id
