@@ -52,6 +52,6 @@ class Deal < ApplicationRecord
   end
 
   def name
-    "#{id} - #{type_of_service.titleize} to #{contact.full_name}"
+    "#{id} - #{type_of_service.titleize}: #{contact.full_name}"
   end
 end

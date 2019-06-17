@@ -13,8 +13,7 @@ class DealsController < ApplicationController
 
   # GET /deals/new
   def new
-    @property = Property.find params[:property_id]
-    @deal = @property.deals.new
+    @deal = Deal.new(broker: current_user)
   end
 
   # GET /deals/1/edit
@@ -23,8 +22,7 @@ class DealsController < ApplicationController
   # POST /deals
   # POST /deals.json
   def create
-    @property = Property.find params[:property_id]
-    @deal = @property.deals.new(deal_params)
+    @deal = Deal.new(deal_params)
 
     respond_to do |format|
       if @deal.save
@@ -54,10 +52,9 @@ class DealsController < ApplicationController
   # DELETE /deals/1
   # DELETE /deals/1.json
   def destroy
-    property = @deal.property
     @deal.destroy
     respond_to do |format|
-      format.html { redirect_to property, notice: 'Deal was successfully deleted.' }
+      format.html { redirect_to deals_url, notice: 'Deal was successfully deleted.' }
       format.json { head :no_content }
     end
   end
