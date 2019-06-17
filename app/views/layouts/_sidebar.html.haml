@@ -22,27 +22,27 @@
       %i.fas.fa-fw.fa-tachometer-alt
       %span Overview
   / Nav Item - Users
-  %li.nav-item{class: ('active' if current_page? users_path)}
+  %li.nav-item{class: ('active' if controller_name == 'users')}
     %a.nav-link{href: users_path}
       %i.fas.fa-fw.fa-user
       %span Users
   / Nav Item - Milestones
-  %li.nav-item{class: ('active' if current_page? milestones_path)}
+  %li.nav-item{class: ('active' if controller_name == 'milestones')}
     %a.nav-link{href: milestones_path}
       %i.fas.fa-fw.fa-trophy
       %span Milestones
   / Nav Item - Contacts
-  %li.nav-item{class: ('active' if current_page? contacts_path)}
+  %li.nav-item{class: ('active' if controller_name == 'contacts')}
     %a.nav-link{href: contacts_path}
       %i.fas.fa-fw.fa-users
       %span Contacts
   / Nav Item - Properties
-  %li.nav-item{class: ('active' if current_page? properties_path)}
+  %li.nav-item{class: ('active' if controller_name == 'properties')}
     %a.nav-link{href: properties_path}
       %i.fas.fa-fw.fa-building
       %span Properties
   / Nav Item - Deals
-  %li.nav-item{class: ('active' if current_page? deals_path)}
+  %li.nav-item{class: ('active' if controller_name == 'deals')}
     %a.nav-link{href: deals_path}
       %i.fas.fa-fw.fa-handshake
       %span Deals
