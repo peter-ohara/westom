@@ -4,20 +4,22 @@
   %li.breadcrumb-item
     = link_to 'Contacts', contacts_path
   %li.breadcrumb-item.active
-    = @contact.full_name
+    = @contact.fully_identifying_information
 
 = content_for :actions do
-  = link_to new_contact_property_path(@contact), class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+  = link_to new_deal_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
     %i.fas.fa-plus.fa-sm.text-white-50
-    Add New Property
-
+    Add New Deal
 
 .row
   .col-md-6
     = card_with_body('Details') do
       %dl.row
-        %dt.col-md-4 Full name
-        %dd.col-md-8= @contact.full_name
+        %dt.col-md-4 First name
+        %dd.col-md-8= @contact.first_name
+
+        %dt.col-md-4 Last name
+        %dd.col-md-8= @contact.last_name
 
         %dt.col-md-4 Mobile
         %dd.col-md-8= link_to @contact.mobile, "tel:#{@contact.mobile}"
@@ -25,20 +27,14 @@
         %dt.col-md-4 Email
         %dd.col-md-8= link_to @contact.email, "mailto:frank:#{@contact.email}"
 
+        %dt.col-md-4 Date of birth
+        %dd.col-md-8= @contact.date_of_birth.to_formatted_s(:long)
+
         %dt.col-md-4 Present address
         %dd.col-md-8= @contact.present_address
 
-        %dt.col-md-4 Community
-        %dd.col-md-8= @contact.community
-
-        %dt.col-md-4 Length of stay at present address
-        %dd.col-md-8= @contact.length_of_stay_at_present_address
-
-        %dt.col-md-4 Occupation
-        %dd.col-md-8= @contact.occupation
-
-        %dt.col-md-4 Date of birth
-        %dd.col-md-8= @contact.date_of_birth.to_formatted_s(:long)
+        %dt.col-md-4 Notes
+        %dd.col-md-12= @contact.notes
 
       = link_to 'EDIT', edit_contact_path(@contact), class: 'card-link'
       = link_to 'DELETE', @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'

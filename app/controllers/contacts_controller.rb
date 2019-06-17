@@ -14,7 +14,6 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
-    @contact.properties.build
   end
 
   # GET /contacts/1/edit
@@ -69,35 +68,12 @@ class ContactsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
-    params.require(:contact).permit(:full_name,
+    params.require(:contact).permit(:first_name,
+                                    :last_name,
+                                    :mobile,
+                                    :email,
                                     :date_of_birth,
                                     :present_address,
-                                    :community,
-                                    :length_of_stay_at_present_address,
-                                    :mobile,
-                                    :occupation,
-                                    :email,
-                                    :personal_property,
-                                    :jointly_owned_property,
-                                    :agent,
-                                    :has_authority_from_owner,
-                                    :has_site_plan,
-                                    :site_plan_request,
-                                    :search_report,
-                                    :search_report_request,
-                                    :valuation_report,
-                                    :valuation_report_request,
-                                    :type_of_service,
-                                    :request_details,
-                                    :request_date,
-                                    :client_signature,
-                                    :signature_of_authorized_broker,
-                                    properties_attributes: %i[_destroy
-                                                              id
-                                                              name
-                                                              description
-                                                              location
-                                                              category
-                                                              property_type])
+                                    :notes)
   end
 end

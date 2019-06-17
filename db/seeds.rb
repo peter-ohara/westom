@@ -8,32 +8,15 @@
 require 'factory_bot_rails'
 
 brokers = []
-clients = []
+
 8.times { brokers.push FactoryBot.create :user }
 
-brokers.each do |_broker|
-  rand(10...20).times do
-    clients.push FactoryBot.create :contact
-  end
-end
+me = User.create(first_name: 'Peter',
+                 last_name: 'Adu',
+                 email: 'ohara.invent@gmail.com',
+                 password: 'password')
+brokers.push me
 
-clients.each do |client|
-  rand(1...3).times do
-    property = FactoryBot.create :property, contact: client
-    rand(0..2).times do
-      deal = FactoryBot.create :deal, property: property, contact: clients.sample
-
-      3.times do
-        FactoryBot.create :activity, deal: deal, broker: deal.broker
-      end
-    end
-  end
-end
-
-User.create(first_name: 'Peter',
-            last_name: 'Adu',
-            email: 'ohara.invent@gmail.com',
-            password: 'password')
 
 start_of_year = Date.new(2019, 1, 1)
 middle_of_year = Date.new(2019, 6, 30)
@@ -44,7 +27,7 @@ FactoryBot.create(:milestone,
                   target_type: :revenue,
                   target: 6_000_000,
                   status: :active,
-                  users: brokers[0..3])
+                  users: brokers[5..8])
 
 FactoryBot.create(:milestone,
                   title: 'Deals milestone for 1st half of 2019',
@@ -53,9 +36,10 @@ FactoryBot.create(:milestone,
                   target_type: :deals,
                   target: 20,
                   status: :active,
-                  users: brokers[0..3])
+                  users: brokers[5..8])
 
-brokers[0..3].map do |broker|
+
+brokers[5..8].map do |broker|
   deal = FactoryBot.create :deal,
                            broker: broker,
                            stage: :closed,
@@ -64,5 +48,9 @@ brokers[0..3].map do |broker|
 
   3.times do
     FactoryBot.create :activity, deal: deal, broker: broker
+  end
+
+  rand(0..10).times do
+    FactoryBot.create :deal, broker: broker
   end
 end

@@ -1,46 +1,51 @@
 %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
   / Sidebar - Brand
-  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{href: "index.html"}
+  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{href: root_path }
     .sidebar-brand-icon.rotate-n-15
       %i.fas.fa-laugh-wink
     .sidebar-brand-text.mx-3 Westom
   / Divider
   %hr.sidebar-divider.my-0/
-  / Nav Item - Dashboard
-  %li.nav-item.active
-    %a.nav-link{href: root_path}
-      %i.fas.fa-fw.fa-tachometer-alt
-      %span Dashboard
+  / Nav Item - Home
+  %li.nav-item{class: ('active' if current_page? user_path(current_user))}
+    %a.nav-link{href: user_path(current_user)}
+      %i.fas.fa-fw.fa-home
+      %span Home
   / Divider
   %hr.sidebar-divider/
   / Heading
   .sidebar-heading
     Interface
+  / Nav Item - Overview
+  %li.nav-item{class: ('active' if current_page? overview_path)}
+    %a.nav-link{href: overview_path}
+      %i.fas.fa-fw.fa-tachometer-alt
+      %span Overview
   / Nav Item - Users
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? users_path)}
     %a.nav-link{href: users_path}
       %i.fas.fa-fw.fa-user
       %span Users
+  / Nav Item - Milestones
+  %li.nav-item{class: ('active' if current_page? milestones_path)}
+    %a.nav-link{href: milestones_path}
+      %i.fas.fa-fw.fa-trophy
+      %span Milestones
   / Nav Item - Contacts
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? contacts_path)}
     %a.nav-link{href: contacts_path}
       %i.fas.fa-fw.fa-users
       %span Contacts
   / Nav Item - Properties
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? properties_path)}
     %a.nav-link{href: properties_path}
-      %i.fas.fa-fw.fa-home
+      %i.fas.fa-fw.fa-building
       %span Properties
   / Nav Item - Deals
-  %li.nav-item
+  %li.nav-item{class: ('active' if current_page? deals_path)}
     %a.nav-link{href: deals_path}
       %i.fas.fa-fw.fa-handshake
       %span Deals
-  / Nav Item - Milestones
-  %li.nav-item
-    %a.nav-link{href: milestones_path}
-      %i.fas.fa-fw.fa-trophy
-      %span Milestones
   / Divider
   %hr.sidebar-divider.d-none.d-md-block/
   / Sidebar Toggler (Sidebar)

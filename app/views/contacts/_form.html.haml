@@ -1,35 +1,10 @@
 = simple_form_for @contact do |f|
   = f.error_notification
-  = f.input :full_name
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :mobile
+  = f.input :email
   = f.input :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 100
   = f.input :present_address
-  = f.input :community
-  = f.input :length_of_stay_at_present_address
-  = f.input :mobile
-  = f.input :occupation
-  = f.input :email
-  = f.input :personal_property
-  = f.input :jointly_owned_property
-  = f.input :agent
-  = f.input :has_authority_from_owner
-  = f.input :has_site_plan
-  = f.input :site_plan_request
-  = f.input :search_report
-  = f.input :search_report_request
-  = f.input :valuation_report
-  = f.input :valuation_report_request
-  = f.input :type_of_service, collection: Contact.type_of_services.keys.map {|service| [service.titleize, service]}
-  = f.input :request_details
-  = f.input :request_date
-  = f.input :client_signature
-  = f.input :signature_of_authorized_broker
-
-  -#.my-5
-  -#  %h3 Properties
-  -#  #properties
-  -#    = f.simple_fields_for :properties do |property|
-  -#      = render 'property_fields', f: property
-  -#    .links
-  -#      = link_to_add_association 'Add Property', f, :properties
-  -#
+  = f.input :notes
   = f.button :submit, class: 'btn-primary'

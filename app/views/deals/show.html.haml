@@ -6,55 +6,72 @@
   %li.breadcrumb-item.active
     = @deal.deal_number
 
-
 .row
-  .col-md-6
+  .col-md-12
     = card_with_body('Details') do
-      %dl.row
-        %dt.col-md-4 Deal Number
-        %dd.col-md-8=  @deal.deal_number
+      .row
+        .col-md-6
+          %dl.row
+            %dt.col-md-4 Deal Number
+            %dd.col-md-8=  @deal.deal_number
 
-        %dt.col-md-4 Client
-        %dd.col-md-8= link_to @deal.contact.full_name, @deal.contact
+            %dt.col-md-4 Client
+            %dd.col-md-8= link_to @deal.contact.full_name, @deal.contact
 
-        %dt.col-md-4 Property
-        %dd.col-md-8= link_to @deal.property.full_name, @deal.property
+            %dt.col-md-4 Property
+            %dd.col-md-8= link_to @deal.property.full_name, @deal.property
 
-        %dt.col-md-4 Type of service
-        %dd.col-md-8= @deal.type_of_service.titleize
+            %dt.col-md-4 Broker
+            %dd.col-md-8= link_to @deal.broker.full_name, @deal.broker
 
-        %dt.col-md-4 Request date
-        %dd.col-md-8= @deal.request_date.to_formatted_s(:long)
+            %dt.col-md-4 Request date
+            %dd.col-md-8= @deal.request_date.to_formatted_s(:long)
 
-        %dt.col-md-4 Request details
-        %dd.col-md-8= @deal.request_details
+            %dt.col-md-4 Request details
+            %dd.col-md-8= @deal.request_details
 
-        %dt.col-md-4 Amount
-        %dd.col-md-8= humanized_money_with_symbol @deal.amount
+        .col-md-6
+          %dl.row
+            %dt.col-md-4 Type of service
+            %dd.col-md-8= @deal.type_of_service.titleize
 
-        %dt.col-md-4 Broker
-        %dd.col-md-8= link_to @deal.broker.full_name, @deal.broker
+            %dt.col-md-4 Amount
+            %dd.col-md-8= humanized_money_with_symbol @deal.amount
 
-        %dt.col-md-4 Deadline
-        %dd.col-md-8= @deal.deadline.to_formatted_s(:long)
+            %dt.col-md-4 Deadline
+            %dd.col-md-8= @deal.deadline.to_formatted_s(:long)
 
-        %dt.col-md-4 Stage
-        %dd.col-md-8= @deal.stage.titleize
+            %dt.col-md-4 Stage
+            %dd.col-md-8= @deal.stage.titleize
 
-        %dt.col-md-4 Date of closing
-        %dd.col-md-8= @deal.date_of_closing&.to_formatted_s(:long)
+            %dt.col-md-4 Date of closing
+            %dd.col-md-8= @deal.date_of_closing&.to_formatted_s(:long)
 
-        %dt.col-md-4 Expiration date
-        %dd.col-md-8= @deal.expiration_date.to_formatted_s(:long)
+            %dt.col-md-4 Expiration date
+            %dd.col-md-8= @deal.expiration_date.to_formatted_s(:long)
 
       = link_to 'EDIT', edit_deal_path(@deal), class: 'card-link'
       = link_to 'DELETE', @deal, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'
 
-  .col-md-6
-    = expandable_list @deal.activities, title: 'Activities', id: 'activities', preview: 5 do |activity|
-      = link_to activity, class: 'list-group-item list-group-item-action' do
-        .d-flex.w-100.justify-content-between
-          %h5.mb-1= activity.title
-          %small= "Due in #{time_ago_in_words activity.due_date}"
-        %p.mb-1= activity.description
-        %small= activity.broker.full_name
+  .col-md-12
+    .d-sm-flex.align-items-center.justify-content-between.mb-2
+      %div
+        %h2.h6 Activity
+      %div
+        %button.d-none.d-sm-inline-block.btn.btn-sm.btn-primary.shadow-sm(data-toggle="collapse" href="#newActivityForm2" role="button" aria-expanded="false" aria-controls="newActivityForm")
+          %i.fas.fa-plus.fa-sm.text-white-50
+          Add activity
+    .card.mb-3.shadow-sm.collapse#newActivityForm2
+      .card-body.mb-0
+        = simple_form_for [@deal, Activity.new], remote: true do |f|
+          = f.error_notification
+          = f.input :title, placeholder: 'Enter your task', label: false
+          = f.button :submit, 'Add activity', class: 'btn-primary btn-sm'
+          = f.button :button, type: 'reset', class: 'btn', data: { toggle: 'collapse', target: "#newActivityForm2" } do
+            %i.fas.fa-times.fa-lg.text-dark-50
+
+    %div{id: 'activities'}
+      = render @deal.activities.order(created_at: :desc)
+    - if @deal.activities.count == 0
+      .card-body
+        No items found in this list

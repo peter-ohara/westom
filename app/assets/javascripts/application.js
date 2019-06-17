@@ -30,4 +30,15 @@
 
 //= require datatables
 
+//= require trix
+
+//= require select2
+
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  $( "select[data-searchable]" ).select2({
+    theme: "bootstrap"
+  });
+});
+

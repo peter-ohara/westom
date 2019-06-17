@@ -1,8 +1,13 @@
 class Property < ApplicationRecord
   include Filterable
 
-  belongs_to :contact, inverse_of: :properties
+  belongs_to :owner,
+             class_name: 'Contact',
+             foreign_key: :contact_id,
+             inverse_of: :properties
+
   has_many :deals, inverse_of: :property
+  has_many :brokers, through: :deals
 
   enum category: { residential: 0, commercial: 1 }
   enum property_type: { land: 0, house: 1, apartment: 2 }

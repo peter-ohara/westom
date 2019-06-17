@@ -10,6 +10,11 @@
     = active_link_to 'About to expire', deals_path(expires_by: 1.year.from_now), class: 'nav-item  nav-link', active: /\?expires_by=/
     = active_link_to 'On the verge of closing', deals_path(stage_higher_than: 2), class: 'nav-item  nav-link', active: :exact
 
+= content_for :actions do
+  = link_to new_deal_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New Deal
+
 .card.shadow-sm.mb-4
   .card-body
     .table-responsive
@@ -41,9 +46,9 @@
         %tbody
           - @deals.each do |deal|
             %tr
-              %td= link_to deal.deal_number, deal
-              %td= link_to deal.contact.full_name, deal.contact
-              %td= link_to deal.property.name, deal.property
+              %td= link_to deal.name, deal
+              %td= deal.contact.full_name
+              %td= deal.property.name
               %td= deal.type_of_service.titleize
               %td= humanized_money_with_symbol deal.amount
               %td{ data: {sort: deal.request_date.strftime("%Y%m%d%H%M%s") } }

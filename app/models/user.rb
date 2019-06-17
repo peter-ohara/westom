@@ -10,6 +10,8 @@ class User < ApplicationRecord
          :lockable
 
   has_many :deals, inverse_of: :broker
+  has_many :properties, through: :deals
+  has_many :contacts, through: :deals
 
   has_many :user_milestones, inverse_of: :user
   has_many :milestones, through: :user_milestones
@@ -20,7 +22,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def deals
-    Deal.closed
+  def fully_identifying_information
+    "#{full_name} (#{mobile})"
   end
 end

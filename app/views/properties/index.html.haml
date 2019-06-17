@@ -10,6 +10,11 @@
     = active_link_to 'Properties for Sale', properties_path(listing_type: :for_sale), class: 'nav-item  nav-link', active: :exact
     = active_link_to 'Properties for Lease', properties_path(listing_type: :for_lease), class: 'nav-item  nav-link', active: :exact
 
+= content_for :actions do
+  = link_to new_property_path, class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+    %i.fas.fa-user-plus.fa-sm.text-white-50
+    Add New Property
+
 .card.shadow-sm.mb-4
   .card-body
     .table-responsive
@@ -44,4 +49,4 @@
                 = property.property_type.titleize
               %td.listing_type{ data: {sort: property.listing_type_before_type_cast } }
                 = property.listing_type.titleize
-              %td= link_to property.contact.full_name, property.contact
+              %td= link_to property.owner.full_name, property.owner

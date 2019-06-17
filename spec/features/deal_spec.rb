@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.feature 'Deal Management', js: true do
   let!(:contact) { FactoryBot.create(:contact) }
   let!(:property) { FactoryBot.create(:property) }
-  let!(:deal) { FactoryBot.build(:deal) }
+  let!(:deal) { FactoryBot.build(:deal, contact: contact, property: property) }
   let!(:existing_deal) do
     FactoryBot.create(:deal, contact: contact, property: property)
   end
@@ -18,14 +18,14 @@ RSpec.feature 'Deal Management', js: true do
   scenario 'should add a deal to a property' do
     visit property_path property
     click_link 'Add New Deal'
-    fill_out_deal_information(deal, contact)
+    fill_out_deal_information(deal)
     click_button 'Create Deal'
     expect(page).to have_content 'Deal was successfully created.'
   end
 
   scenario 'should edit a deal (lead or client)' do
     visit edit_deal_path existing_deal
-    fill_out_deal_information(deal, contact)
+    fill_out_deal_information(deal)
     click_button 'Update Deal'
     expect(page).to have_content 'Deal was successfully updated.'
   end
@@ -119,8 +119,10 @@ RSpec.feature 'Deal Management', js: true do
   end
 end
 
-def fill_out_deal_information(deal, contact)
-  select contact.full_name, from: :deal_contact_id
+def fill_out_deal_information(deal)
+  select deal.contact.fully_identifying_information, from: :deal_contact_id
+  select deal.property.name, from: :deal_property_id
+  select user.full_name, from: :deal_user_id
 
   select deal.type_of_service.titleize, from: :deal_type_of_service
 
@@ -129,10 +131,7 @@ def fill_out_deal_information(deal, contact)
   select deal.request_date.strftime('%-d'), from: 'deal_request_date_3i'
 
   fill_in :deal_request_details, with: deal.request_details
-
   fill_in :deal_amount, with: deal.amount
-
-  select user.full_name, from: :deal_user_id
 
   select deal.deadline.strftime('%Y'), from: 'deal_deadline_1i'
   select deal.deadline.strftime('%B'), from: 'deal_deadline_2i'
