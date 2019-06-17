@@ -6,6 +6,6 @@ FactoryBot.define do
     category { [0, 1].sample }
     property_type { [0, 1, 2].sample }
     listing_type { [0, 1, 2].sample }
-    contact
+    owner
   end
 end

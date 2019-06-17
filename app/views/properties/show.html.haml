@@ -7,7 +7,7 @@
     = @property.name
 
 = content_for :actions do
-  = link_to new_property_deal_path(@property), class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
+  = link_to new_deal_path(@property), class: 'd-none d-sm-inline-block btn btn-sm btn-primary shadow-sm' do
     %i.fas.fa-plus.fa-sm.text-white-50
     Add New Deal
 
@@ -33,8 +33,8 @@
         %dt.col-md-3 Listing Type
         %dd.col-md-9= @property.listing_type.titleize
 
-        %dt.col-md-3 Client
-        %dd.col-md-9= link_to @property.contact.full_name, @property.contact
+        %dt.col-md-3 Owner
+        %dd.col-md-9= link_to @property.owner.full_name, @property.owner
 
       = link_to 'EDIT', edit_property_path(@property), class: 'card-link'
       = link_to 'DELETE', @property, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link text-danger'

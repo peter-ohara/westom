@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.feature 'Property Management', js: true do
   let!(:contact1) { FactoryBot.create(:contact) }
   let!(:contact2) { FactoryBot.create(:contact) }
-  let!(:property) { FactoryBot.build(:property) }
-  let!(:existing_property) { FactoryBot.create(:property, contact: contact1) }
+  let!(:property) { FactoryBot.build(:property, owner: contact2) }
+  let!(:existing_property) { FactoryBot.create(:property, owner: contact1) }
 
   let!(:user) { FactoryBot.create(:user) }
   before :each do
@@ -14,14 +14,13 @@ RSpec.feature 'Property Management', js: true do
   end
 
   scenario 'should be able to add a property to a contact' do
-    visit contact_path contact1
+    visit root_path
 
     click_link 'Add New Property'
 
     fill_out_property_information(property)
 
     click_button 'Create Property'
-    expect(page).to have_current_path contact_path contact1
     expect(page).to have_content 'Property was successfully created.'
   end
 
@@ -83,6 +82,8 @@ RSpec.feature 'Property Management', js: true do
 end
 
 def fill_out_property_information(property)
+  select property.owner.fully_identifying_information, from: :property_contact_id
+
   fill_in :property_name, with: property.name
 
   fill_in :property_description, with: property.description
@@ -100,7 +101,7 @@ def expect_page_to_have_property_information(page, existing_property)
   expect(page).to have_content existing_property.category.titleize
   expect(page).to have_content existing_property.property_type.titleize
   expect(page).to have_content existing_property.listing_type.titleize
-  expect(page).to have_content existing_property.contact.full_name
+  expect(page).to have_content existing_property.owner.full_name
 end
 
 def expect_each_property_to_have_listing_type(listing_type)
