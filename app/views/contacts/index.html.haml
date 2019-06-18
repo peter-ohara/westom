@@ -16,19 +16,19 @@
         %thead
           %tr
             %th Full name
-            %th Email
+            %th Mobile
             %th Present address
             %th Notes
         %tfoot
           %tr
             %th Full name
-            %th Email
+            %th Mobile
             %th Present address
             %th Notes
         %tbody
           - @contacts.each do |contact|
             %tr
-              %td= link_to contact.fully_identifying_information, contact
-              %td= contact.email
+              %td= link_to contact.full_name, contact
+              %td= contact.mobile
               %td= contact.present_address
               %td= contact.notes
