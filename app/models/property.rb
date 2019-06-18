@@ -13,9 +13,19 @@ class Property < ApplicationRecord
   has_many :deals, inverse_of: :property
   has_many :brokers, through: :deals
 
-  enum category: { residential: 0, commercial: 1 }
-  enum property_type: { land: 0, house: 1, apartment: 2 }
-  enum listing_type: { not_listed: 0, for_sale: 1, for_lease: 2 }
+  enum category: { residential: 0,
+                   commercial: 1,
+                   residential_or_commercial: 3 }
+  enum property_type: { land: 0,
+                        house: 1,
+                        apartment: 2,
+                        building: 3,
+                        warehouse: 4,
+                        town_house: 5 }
+  enum listing_type: { not_listed: 0,
+                       for_sale: 1,
+                       for_lease: 2,
+                       for_rent_or_lease: 3 }
 
   scope :listing_type, ->(listing_type) { where listing_type: listing_type }
 
