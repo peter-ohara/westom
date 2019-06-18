@@ -87,11 +87,11 @@ def fill_out_property_information(property)
   fill_in :property_description, with: property.description
   fill_in :property_location, with: property.location
   fill_in :property_price, with: property.price
-  find(:negotiable).set(property.negotiable)
+  find(:property_negotiable).set(property.negotiable)
 
   fill_in :status, with: property.status
 
-  select property.category.titleize, from: 'property_category'
+  select property.purpose.titleize, from: 'property_purpose'
   select property.property_type.titleize, from: 'property_property_type'
   select property.listing_type.titleize, from: 'property_listing_type'
 end
@@ -99,7 +99,7 @@ end
 def expect_page_to_have_property_information(page, existing_property)
   expect(page).to have_content existing_property.description
   expect(page).to have_content existing_property.location
-  expect(page).to have_content existing_property.category.titleize
+  expect(page).to have_content existing_property.purpose.titleize
   expect(page).to have_content existing_property.property_type.titleize
   expect(page).to have_content existing_property.listing_type.titleize
   expect(page).to have_content(

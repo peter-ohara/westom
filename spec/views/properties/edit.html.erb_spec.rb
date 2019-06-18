@@ -6,7 +6,7 @@ RSpec.describe "properties/edit", type: :view do
       :name => "MyString",
       :description => "MyText",
       :location => "MyText",
-      :category => 1,
+      :purpose => 1,
       :property_type => 1,
       :contact => nil
     ))
@@ -23,7 +23,7 @@ RSpec.describe "properties/edit", type: :view do
 
       assert_select "textarea[name=?]", "property[location]"
 
-      assert_select "input[name=?]", "property[category]"
+      assert_select "input[name=?]", "property[purpose]"
 
       assert_select "input[name=?]", "property[property_type]"
 

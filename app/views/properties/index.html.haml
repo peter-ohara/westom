@@ -24,7 +24,7 @@
             %th Id
             %th Description
             %th Location
-            %th Category
+            %th Purpose
             %th Property type
             %th Listing type
             %th Price
@@ -34,7 +34,7 @@
             %th Id
             %th Description
             %th Location
-            %th Category
+            %th Purpose
             %th Property type
             %th Listing type
             %th Price
@@ -45,8 +45,8 @@
               %td= link_to property.name, property
               %td= property.description
               %td= property.location
-              %td{ data: {sort: property.category_before_type_cast } }
-                = property.category&.titleize
+              %td{ data: {sort: property.purpose_before_type_cast } }
+                = property.purpose&.titleize
               %td{ data: {sort: property.property_type_before_type_cast } }
                 = property.property_type&.titleize
               %td.listing_type{ data: {sort: property.listing_type_before_type_cast } }

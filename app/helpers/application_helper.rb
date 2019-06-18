@@ -166,13 +166,13 @@ module ApplicationHelper
     )
   end
 
-  def deal_break_down_by_category(id)
+  def deal_break_down_by_purpose(id)
     pie_chart(
       {
         labels: %w[Residential Commercial],
         datasets: [{
-          data: [Deal.closed.last_year.joins(:property).where(properties: { category: :residential }).count,
-                 Deal.closed.last_year.joins(:property).where(properties: { category: :commercial }).count],
+          data: [Deal.closed.last_year.joins(:property).where(properties: { purpose: :residential }).count,
+                 Deal.closed.last_year.joins(:property).where(properties: { purpose: :commercial }).count],
           background_color: %w[#4e73df #1cc88a],
           hover_background_color: %w[#2e59d9 #17a673],
           hover_border_color: 'rgba(234, 236, 244, 1)'

@@ -56,7 +56,7 @@
           %small= property.property_type.titleize
         %p.mb-1= property.description
         %p.mb-1= property.location
-        %small= property.category.titleize
+        %small= property.purpose.titleize
 
   .col-md-6
     = expandable_list @user.deals, title: 'Deals', id: 'deals', preview: 5 do |deal|

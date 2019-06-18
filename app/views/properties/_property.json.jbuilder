@@ -3,7 +3,7 @@
 json.extract! property, :id,
               :description,
               :location,
-              :category,
+              :purpose,
               :property_type,
               :price,
               :negotiable,

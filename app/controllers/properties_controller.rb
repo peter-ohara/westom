@@ -72,7 +72,7 @@ class PropertiesController < ApplicationController
   def property_params
     params.require(:property).permit(:description,
                                      :location,
-                                     :category,
+                                     :purpose,
                                      :property_type,
                                      :price_currency,
                                      :price,

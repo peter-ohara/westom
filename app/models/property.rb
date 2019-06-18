@@ -13,7 +13,7 @@ class Property < ApplicationRecord
   has_many :deals, inverse_of: :property
   has_many :brokers, through: :deals
 
-  enum category: { residential: 0,
+  enum purpose: { residential: 0,
                    commercial: 1,
                    residential_or_commercial: 3 }
   enum property_type: { land: 0,

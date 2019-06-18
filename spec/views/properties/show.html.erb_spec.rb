@@ -6,7 +6,7 @@ RSpec.describe "properties/show", type: :view do
       :name => "Name",
       :description => "MyText",
       :location => "MyText",
-      :category => 2,
+      :purpose => 2,
       :property_type => 3,
       :contact => nil
     ))
