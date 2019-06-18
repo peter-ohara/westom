@@ -34,10 +34,7 @@
         %dd.col-md-9= @property.listing_type&.titleize
 
         %dt.col-md-3 Price
-        %dd.col-md-9= humanized_money_with_symbol @property.price
-
-        %dt.col-md-3 Negotiable
-        %dd.col-md-9= @property.negotiable&.to_s.titleize
+        %dd.col-md-9= "#{humanized_money_with_symbol @property.price} #{"Negotiable" if @property.negotiable}"
 
         %dt.col-md-3 Status
         %dd.col-md-9= @property.status
