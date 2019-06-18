@@ -7,6 +7,7 @@ RSpec.feature 'Contact Management', js: true do
   let!(:existing_contact) { FactoryBot.create(:contact) }
 
   let!(:user) { FactoryBot.create(:user) }
+  let!(:user2) { FactoryBot.create(:user) }
   let!(:deal) do
     FactoryBot.create(:deal, contact: existing_contact, broker: user)
   end
@@ -33,10 +34,10 @@ RSpec.feature 'Contact Management', js: true do
   scenario 'should be able to assign myself or another user as ' \
            'the broker for a deal' do
     visit edit_deal_path deal
-    select user.full_name, from: :deal_user_id
+    select user2.full_name, from: :deal_user_id
     click_button 'Update Deal'
     expect(page).to have_content 'Deal was successfully updated.'
-    expect(page).to have_content contact.full_name
+    expect(page).to have_content user2.full_name
   end
 
   scenario 'should delete a contact (lead or client)' do
