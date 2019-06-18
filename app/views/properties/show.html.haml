@@ -25,13 +25,13 @@
         %dd.col-md-9= @property.location
 
         %dt.col-md-3 Category
-        %dd.col-md-9= @property.category.titleize
+        %dd.col-md-9= @property.category&.titleize
 
         %dt.col-md-3 Property Type
-        %dd.col-md-9= @property.property_type.titleize
+        %dd.col-md-9= @property.property_type&.titleize
 
         %dt.col-md-3 Listing Type
-        %dd.col-md-9= @property.listing_type.titleize
+        %dd.col-md-9= @property.listing_type&.titleize
 
         %dt.col-md-3 Price
         %dd.col-md-9= humanized_money_with_symbol @property.price

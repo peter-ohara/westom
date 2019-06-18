@@ -33,7 +33,7 @@
         %dd.col-md-8= link_to @contact.email, "mailto:frank:#{@contact.email}"
 
         %dt.col-md-4 Date of birth
-        %dd.col-md-8= @contact.date_of_birth.to_formatted_s(:long)
+        %dd.col-md-8= @contact.date_of_birth&.to_formatted_s(:long)
 
         %dt.col-md-4 Present address
         %dd.col-md-8= @contact.present_address
@@ -48,10 +48,10 @@
       = link_to property, class: 'list-group-item list-group-item-action' do
         .d-flex.w-100.justify-content-between
           %h5.mb-1= property.id
-          %small= property.property_type.titleize
+          %small= property.property_type&.titleize
         %p.mb-1= property.description
         %p.mb-1= "Location: #{property.location}"
-        %small= property.category.titleize
+        %small= property.category&.titleize
 
   .col-md-6
     = expandable_list(@contact.deals, title: 'Deals', id: 'deals', preview: 5) do |deal|

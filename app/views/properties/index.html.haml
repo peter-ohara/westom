@@ -46,10 +46,10 @@
               %td= property.description
               %td= property.location
               %td{ data: {sort: property.category_before_type_cast } }
-                = property.category.titleize
+                = property.category&.titleize
               %td{ data: {sort: property.property_type_before_type_cast } }
-                = property.property_type.titleize
+                = property.property_type&.titleize
               %td.listing_type{ data: {sort: property.listing_type_before_type_cast } }
-                = property.listing_type.titleize
+                = property.listing_type&.titleize
               %td= humanized_money_with_symbol property.price
               %td= link_to property.owner.full_name, property.owner
