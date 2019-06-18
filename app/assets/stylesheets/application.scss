@@ -6,3 +6,9 @@
 @import "trix";
 @import "select2";
 @import "select2-bootstrap";
+
+
+.select2-container {
+  width: 100% !important;
+  padding: 0;
+}
