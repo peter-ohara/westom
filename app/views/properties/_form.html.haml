@@ -10,5 +10,12 @@
   = f.input :category, collection: Property.categories.keys.map {|category| [category.titleize, category]}
   = f.input :property_type, collection: Property.property_types.keys.map {|p_type| [p_type.titleize, p_type]}
   = f.input :listing_type, collection: Property.listing_types.keys.map {|p_type| [p_type.titleize, p_type]}
-  = f.input :price, label: 'Price (US$)'
+  .form-row
+    = f.input :price_currency,
+              label: 'Currency',
+              collection: ['USD', 'GHS'],
+              wrapper_html: { class: 'col-lg-3' }
+    = f.input :price, wrapper_html: { class: 'col-lg-9' }
+  = f.input :negotiable
+  = f.input :status
   = f.submit class: 'btn btn-primary'
