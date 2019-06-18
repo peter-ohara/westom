@@ -36,6 +36,12 @@
         %dt.col-md-3 Price
         %dd.col-md-9= humanized_money_with_symbol @property.price
 
+        %dt.col-md-3 Negotiable
+        %dd.col-md-9= @property.negotiable&.to_s.titleize
+
+        %dt.col-md-3 Status
+        %dd.col-md-9= @property.status
+
         %dt.col-md-3 Owner
         %dd.col-md-9= link_to @property.owner.full_name, @property.owner
 

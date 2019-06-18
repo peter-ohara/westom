@@ -74,7 +74,10 @@ class PropertiesController < ApplicationController
                                      :location,
                                      :category,
                                      :property_type,
+                                     :price_currency,
                                      :price,
+                                     :status,
+                                     :negotiable,
                                      :contact_id)
   end
 end

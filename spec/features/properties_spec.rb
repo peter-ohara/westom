@@ -87,6 +87,9 @@ def fill_out_property_information(property)
   fill_in :property_description, with: property.description
   fill_in :property_location, with: property.location
   fill_in :property_price, with: property.price
+  find(:negotiable).set(property.negotiable)
+
+  fill_in :status, with: property.status
 
   select property.category.titleize, from: 'property_category'
   select property.property_type.titleize, from: 'property_property_type'

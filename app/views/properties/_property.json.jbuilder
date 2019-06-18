@@ -6,6 +6,8 @@ json.extract! property, :id,
               :category,
               :property_type,
               :price,
+              :negotiable,
+              :status,
               :contact_id,
               :created_at,
               :updated_at
